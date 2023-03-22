@@ -2,9 +2,15 @@ let editor;
 
 window.onload = function()
 {
+    ace.require("ace/ext/language_tools");
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/c_cpp"); 
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: false
+    });
 }
 
 function changeLanguage()
@@ -27,6 +33,11 @@ function changeLanguage()
     {
         editor.session.setMode("ace/mode/javascript");
     }
+}
+
+function switchTheme()
+{
+
 }
 
 function executeCode()

@@ -80,7 +80,7 @@
                 </div> -->
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Online Compiler</h5>
 
                 
 
@@ -89,7 +89,7 @@
                       <option selected value="c">C</option>
                       <option value="cpp">C++</option>
                       <option value="php">PHP</option>
-                      <option value="java">Java</option>
+                      <option value="node">Node</option>
                       <option value="py">Python</option>
                     </select>
                   </div>
@@ -97,7 +97,9 @@
 
                   <!-- Line Chart -->
                   
-                  <div class="editor pt-10 pb-10" id="editor" style="height:60vh"></div>
+                  <div style="margin:20px"></div>
+
+                  <div class="editor" id="editor" style="height:60vh"></div>
                   
                   <!-- <div id="reportsChart"></div>
 
@@ -160,8 +162,10 @@
                 <div class="card-body">
                   <h5 class="card-title">Icon Buttons</h5>
     
-                  <button type="button" onclick="executeCode()" class="btn btn-success">Execute Code <i class="bi bi-check-circle"></i></button>
+                  <button type="button" onclick="executeCode()" class="btn btn-success">Execute Code </button>
                 
+                  <button type="button" onclick="switchTheme()" class="btn btn-warning">Switch Theme </button>
+
                 </div>
               </div>
 
@@ -181,6 +185,7 @@
  <div class="card">
   <div class="card-body">
     <h5 class="card-title">Input</h5>
+    <div class="input" style="height:20vh;color:white;background-color:darkslategray"></div>
     
     </div>
 </div><!-- End Default Card -->
@@ -188,7 +193,7 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Output</h5>
-    <div class="output" id="output">
+    <div class="output" style="height:50vh;color:white;background-color:darkslategray" id="output">
 
     </div>
   </div>
@@ -225,8 +230,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/ide.js"></script>
+  <script src="../assets/ace/ext-language_tools.js"></script>
   <script src="../assets/ace/ace.js"></script>
   <script src="../assets/ace/theme-monokai.js"></script>
+  <script src="../assets/ace/theme-github.js"></script>
+
 </body>
 
 </html>
