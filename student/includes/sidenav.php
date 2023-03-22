@@ -40,6 +40,13 @@
         </a>
       </li><!-- End Contact Page Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../inc/logout.php">
+          <i class="bi bi-envelope"></i>
+          <span>Log Out</span>
+        </a>
+      </li>
+
     </ul>
 
   </aside><!-- End Sidebar-->
