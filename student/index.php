@@ -86,11 +86,11 @@
 
                   <div class="col d-flex">
                     <select id="languages" onchange="changeLanguage()" class="form-select" aria-label="Default select example">
-                      <option selected value="c">C</option>
+                      <option selected value="50">C</option>
                       <option value="cpp">C++</option>
                       <option value="php">PHP</option>
-                      <option value="node">Node</option>
-                      <option value="py">Python</option>
+                      <option value="js">Node</option>
+                      <option value="71">Python</option>
                     </select>
                   </div>
 
@@ -99,7 +99,7 @@
                   
                   <div style="margin:20px"></div>
 
-                  <div class="editor" id="editor" style="height:60vh"></div>
+                  <div class="editor" id="editor" style="height:60vh;font-size: 24px;"></div>
                   
                   <!-- <div id="reportsChart"></div>
 
@@ -185,15 +185,15 @@
  <div class="card">
   <div class="card-body">
     <h5 class="card-title">Input</h5>
-    <div class="input" style="height:20vh;color:white;background-color:darkslategray"></div>
-    
+    <div class="input" ></div>
+    <textarea name="ip" style="height:20vh;width:100%;color:white;background-color:darkslategray" id="textip"></textarea>
     </div>
 </div><!-- End Default Card -->
 <!-- Default Card -->
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Output</h5>
-    <div class="output" style="height:50vh;color:white;background-color:darkslategray" id="output">
+    <div class="output" style="height:50vh;color:white;background-color:darkslategray;padding:20px" id="output">
 
     </div>
   </div>
