@@ -26,7 +26,20 @@ function changeLanguage() {
   }
 }
 
-function switchTheme() {}
+function saveCode() {
+  $.ajax({
+    url: "../inc/code_handler.php",
+    method: "POST",
+    data: {
+      lang: $("#formlang").val(),
+      scode: editor.getSession().getValue(),
+      filename: $("formfilename").val(),
+    },
+    success: function (response) {
+      $(".output").html(response);
+    },
+  });
+}
 
 function executeCode() {
   $.ajax({

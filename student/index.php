@@ -1,3 +1,9 @@
+<?php
+
+include './checker.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,11 +41,11 @@
 <body>
 
   <!-- ======= Header ======= -->
-  
+
   <?php include './includes/header.php'; ?>
 
   <!-- ======= Sidebar ======= -->
-  
+
   <?php include './includes/sidenav.php'; ?>
 
   <main id="main" class="main">
@@ -82,7 +88,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Online Compiler</h5>
 
-                
+
 
                   <div class="col d-flex">
                     <select id="languages" onchange="changeLanguage()" class="form-select" aria-label="Default select example">
@@ -96,11 +102,11 @@
 
 
                   <!-- Line Chart -->
-                  
+
                   <div style="margin:20px"></div>
 
                   <div class="editor" id="editor" style="height:60vh;font-size: 24px;"></div>
-                  
+
                   <!-- <div id="reportsChart"></div>
 
                   <script>
@@ -158,13 +164,63 @@
                   <!-- End Line Chart -->
 
                 </div>
-                
+
                 <div class="card-body">
                   <h5 class="card-title">Icon Buttons</h5>
-    
+
                   <button type="button" onclick="executeCode()" class="btn btn-success">Execute Code </button>
-                
-                  <button type="button" onclick="switchTheme()" class="btn btn-warning">Switch Theme </button>
+
+                  <button type="button" onclick="switchTheme()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Save Code </button>
+
+                  <div class="modal fade" id="basicModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Save Code</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="row mb-3">
+                              <label for="inputText" id="formfilename" class="col-sm-4 col-form-label">File Name</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                              </div>
+                            </div>
+
+                            <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Language</label>
+                              <div class="col-sm-8">
+                                <select name="lang" id="formlang" class="form-select" aria-label="Default select example">
+                                <option selected value="50">C</option>
+                                <option value="cpp">C++</option>
+                                <option value="php">PHP</option>
+                                <option value="js">Node</option>
+                                <option value="71">Python</option>
+                                </select>
+                              </div>
+                            </div>
+                            <!-- <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Code</label>
+                              <div class="col-sm-8">
+                                <textarea id="formcode" class="form-control" style="height: 100px"></textarea>
+                              </div>
+                            </div> -->
+                            <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Submit Button</label>
+                              <div class="col-sm-8">
+                                <button type="submit" onclick="saveCode()" class="btn btn-primary">Submit Form</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <button type="button" onclick="switchTheme()" class="btn btn-warning">Share Code</button>
 
                 </div>
               </div>
@@ -181,24 +237,24 @@
         <!-- Right side columns -->
         <div class="col-lg-4">
 
- <!-- Default Card -->
- <div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Input</h5>
-    <div class="input" ></div>
-    <textarea name="ip" style="height:20vh;width:100%;color:white;background-color:darkslategray" id="textip"></textarea>
-    </div>
-</div><!-- End Default Card -->
-<!-- Default Card -->
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Output</h5>
-    <div class="output" style="height:50vh;color:white;background-color:darkslategray;padding:20px" id="output">
+          <!-- Default Card -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Input</h5>
+              <div class="input"></div>
+              <textarea name="ip" style="height:20vh;width:100%;color:white;background-color:darkslategray" id="textip"></textarea>
+            </div>
+          </div><!-- End Default Card -->
+          <!-- Default Card -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Output</h5>
+              <div class="output" style="height:50vh;color:white;background-color:darkslategray;padding:20px" id="output">
 
-    </div>
-  </div>
-</div><!-- End Default Card -->
- 
+              </div>
+            </div>
+          </div><!-- End Default Card -->
+
         </div><!-- End Right side columns -->
 
       </div>
@@ -211,7 +267,7 @@
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
-   
+
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

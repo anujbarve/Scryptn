@@ -1,5 +1,7 @@
 <?php
 
+
+
 // function get_operating_system() {
 //     $u_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 //     $operating_system = 'Unknown Operating System';
