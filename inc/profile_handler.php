@@ -17,36 +17,31 @@ $email = $_POST["userEmail"];
 $description = mysqli_real_escape_string($conn, $_POST["user_desc"]);
 $image = $_FILES["image"]["name"];
 $tempname = $_FILES["image"]["tmp_name"];
-$folder = "../user-data/profile-photos/" . $image;
+$folder = "./user-data/profile-photos/" . $image;
 
+// echo "ID : ".$id."<br>";
+// echo "FULL NAME: ".$fname."<br>";
+// echo "PHONE: ".$phone."<br>";
+// echo "UID : ".$uid."<br>";
+// echo "ADDRESS: ".$address."<br>";
+// echo "GITLINK: ".$gitlink."<br>"; 
+// echo "LNLINK: ".$lnlink."<br>";
+// echo "INLINK: ".$inlink."<br>";
+// echo "TWLINK: ".$twlink."<br>";
+// echo "EMAIL: ".$email."<br>";
+// echo "DESC: ".$description."<br>";
+// echo "IMAGE: ".$image."<br>";
 
 if ($image != null) {
     $sql = "UPDATE `users` SET `userName`='$fname',`userEmail`='$email',`userAddr`='$address',`userPhone`='$phone',`userUid`='$uid',`user_ln`='$lnlink',`user_gh`='$gitlink',`user_in`='$inlink',`user_tw`='$twlink',`user_desc`='$description',`user_photo`='$image' WHERE `users`.`userID` = $id";
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $databasename = "scr";
-
-    $conn = new mysqli(
-        $servername,
-        $username,
-        $password,
-        $databasename
-    );
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $result = $conn->query($sql);
-
+    mysqli_query($conn, $sql);
+  
     if (move_uploaded_file($tempname, $folder)) {
-        $msg = "Image uploaded successfully";
+      $msg = "Image uploaded successfully";
     } else {
-        $msg = "Failed to upload image";
+      $msg = "Failed to upload image";
     }
-
+  
     header("location: ../student/users-profile.php");
     exit();
 } else {
@@ -54,6 +49,7 @@ if ($image != null) {
 
     mysqli_query($conn, $sql);
 
-    header("location: ../user_dash.php?error=none");
+    header("location: ../student/users-profile.php");
     exit();
 }
+?>

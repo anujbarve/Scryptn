@@ -21,5 +21,3 @@ $filename = $_POST["filename"];
 " . mysqli_error($conn);
 	}
 	mysqli_close($conn);
-
-?>

@@ -206,9 +206,31 @@ function createAdmin($conn,$email,$username,$pwd,$security_code){
     exit();
 }
 
-function changePassword()
+function changePassword($id,$oldPassword,$newPassword)
 {
-    
+    session_start();
+    $conn = mysqli_connect("localhost", "root", "", "scr");
+    if (count($_POST) > 0) {
+    $sql = "SELECT * FROM users WHERE userId= ?";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param('i', $id);
+    $statement->execute();
+    $result = $statement->get_result();
+    $row = $result->fetch_assoc();
+
+    if (! empty($row)) {
+        $hashedPassword = $row["userPwd"];
+        $password = PASSWORD_HASH($newPassword, PASSWORD_DEFAULT);
+        if (password_verify($oldPassword, $hashedPassword)) {
+            $sql = "UPDATE users set userPwd=? WHERE userID=?";
+            $statement = $conn->prepare($sql);
+            $statement->bind_param('si', $password, $id);
+            $statement->execute();
+            $message = "Password Changed";
+        } else
+            $message = "Current Password is not correct";
+    }
+}
 }
 
 ?>
