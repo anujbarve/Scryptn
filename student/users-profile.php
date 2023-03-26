@@ -10,7 +10,9 @@ session_start();
 <html lang="en">
 
 <head>
-  
+  <style>
+    
+  </style>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -366,30 +368,38 @@ session_start();
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  <form action="../inc/changepass.php" method="POST">
+
+                  <div hidden class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">ID</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="userID" type="number" class="form-control" id="userID" value="<?php echo $id?>" />
+                      </div>
+                    </div>
+
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword" />
+                        <input name="oldpass" type="password" class="form-control" id="currentPassword" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword" />
+                        <input name="newpass" type="password" class="form-control" id="newPassword" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword" />
+                        <input name="newpass" type="password" class="form-control" id="renewPassword" />
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">
+                      <button type="submit" name="submit" class="btn btn-primary">
                         Change Password
                       </button>
                     </div>

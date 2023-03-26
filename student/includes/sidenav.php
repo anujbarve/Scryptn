@@ -35,14 +35,14 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.php">
-          <i class="bi bi-envelope"></i>
+          <i class="bx bxs-info-square"></i>
           <span>About Us</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="../inc/logout.php">
-          <i class="bi bi-envelope"></i>
+          <i class="bx bx-exit"></i>
           <span>Log Out</span>
         </a>
       </li>

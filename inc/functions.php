@@ -77,7 +77,7 @@ function createUser($conn,$name,$email,$username,$pwd){
     mysqli_stmt_bind_param($stmt,"ssss",$name,$email,$username,$hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../signin.php?message=user_created_successfully");
+    header("location: ../register.php?message=user_created_successfully");
     exit();
 }
 
@@ -226,7 +226,7 @@ function changePassword($id,$oldPassword,$newPassword)
             $statement = $conn->prepare($sql);
             $statement->bind_param('si', $password, $id);
             $statement->execute();
-            $message = "Password Changed";
+            header("location: ../admin/login.php");
         } else
             $message = "Current Password is not correct";
     }

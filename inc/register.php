@@ -1,5 +1,9 @@
 <?php 
 
+
+require_once 'db.php';
+require_once 'functions.php';
+
 if (isset($_POST["submit"])) {
   
   $name = $_POST["name"];
@@ -8,28 +12,24 @@ if (isset($_POST["submit"])) {
   $pwd = $_POST["pwd"];
   $pwdrepeat = $_POST["pwdrepeat"];
 
-
-  require_once 'db.php';
-  require_once 'functions.php';
-
   if (emptyInputRegister($name,$email,$username,$pwd,$pwdrepeat) !== false) {
-    header("location: ../signup.php?message=emptyInput");
+    header("location: ../register.php?message=emptyInput");
     exit();
   }
   if (invalidUid($username) !== false) {
-    header("location: ../signup.php?message=invaliduid");
+    header("location: ../register.php?message=invaliduid");
     exit();
   }
   if (invalidEmail($email) !== false) {
-    header("location: ../signup.php?message=invalidemail");
+    header("location: ../register.php?message=invalidemail");
     exit();
   }
   if (pwdMatch($pwd,$pwdrepeat) !== false) {
-    header("location: ../signup.php?message=passwordsdontmatch");
+    header("location: ../register.php?message=passwordsdontmatch");
     exit();
   }
   if (uidExists($conn,$username,$email) !== false) {
-    header("location: ../signup.php?message=usernametaken");
+    header("location: ../register.php?message=usernametaken");
     exit();
   }
   
@@ -72,7 +72,7 @@ if (isset($_POST["submit"])) {
 
 }
 else{
-  header("location: ../signup.php");
+  header("location: ../register.php");
 }
 
 ?>
