@@ -166,7 +166,7 @@ include './checker.php';
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Icon Buttons</h5>
+                  <h5 class="card-title">Code Operations</h5>
 
                   <button type="button" onclick="executeCode()" class="btn btn-success">Execute Code </button>
 
@@ -184,7 +184,7 @@ include './checker.php';
                             <div class="row mb-3">
                               <label for="inputText" id="formfilename" class="col-sm-4 col-form-label">File Name</label>
                               <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="text" name="filename" class="form-control">
                               </div>
                             </div>
 
