@@ -93,9 +93,9 @@ include './checker.php';
                   <div class="col d-flex">
                     <select id="languages" onchange="changeLanguage()" class="form-select" aria-label="Default select example">
                       <option selected value="50">C</option>
-                      <option value="cpp">C++</option>
-                      <option value="php">PHP</option>
-                      <option value="js">Node</option>
+                      <option value="52">C++</option>
+                      <option value="68">PHP</option>
+                      <option value="63">Node</option>
                       <option value="71">Python</option>
                     </select>
                   </div>
@@ -192,11 +192,11 @@ include './checker.php';
                               <label class="col-sm-4 col-form-label">Language</label>
                               <div class="col-sm-8">
                                 <select name="lang" id="formlang" class="form-select" aria-label="Default select example">
-                                <option selected value="50">C</option>
-                                <option value="cpp">C++</option>
-                                <option value="php">PHP</option>
-                                <option value="js">Node</option>
-                                <option value="71">Python</option>
+                                  <option selected value="50">C</option>
+                                  <option value="52">C++</option>
+                                  <option value="68">PHP</option>
+                                  <option value="63">Node</option>
+                                  <option value="71">Python</option>
                                 </select>
                               </div>
                             </div>
