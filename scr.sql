@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 16, 2023 at 10:30 AM
+-- Generation Time: Apr 16, 2023 at 07:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -69,6 +69,36 @@ INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `message`, `time`, `sta
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `teachers`
+--
+
+CREATE TABLE `teachers` (
+  `teacherID` int(11) NOT NULL,
+  `teacherName` varchar(128) NOT NULL,
+  `teacherEmail` varchar(128) NOT NULL,
+  `teacherAddr` varchar(255) DEFAULT NULL,
+  `teacherPhone` varchar(255) DEFAULT NULL,
+  `teacherUid` varchar(128) NOT NULL,
+  `teacherPwd` varchar(128) NOT NULL,
+  `teacher_ln` text DEFAULT NULL,
+  `teacher_gh` text DEFAULT NULL,
+  `teacher_in` varchar(255) DEFAULT NULL,
+  `teacher_tw` varchar(255) DEFAULT NULL,
+  `teacher_desc` text DEFAULT NULL,
+  `teacher_photo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `teachers`
+--
+
+INSERT INTO `teachers` (`teacherID`, `teacherName`, `teacherEmail`, `teacherAddr`, `teacherPhone`, `teacherUid`, `teacherPwd`, `teacher_ln`, `teacher_gh`, `teacher_in`, `teacher_tw`, `teacher_desc`, `teacher_photo`) VALUES
+(10, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', '102,bell avenue', '09604345549', 'alexg', '$2y$10$WNo.4qemsiuPgALbrl2u4u/97KOMZg3cmELw/rT/Tm2Vb7WvFDJKK', 'https://www.linkedin.com/', 'https://github.com/', 'https://github.com/anujbarve/', 'https://github.com/anujbarve/', 'Hello this is Anuj, I\'m an upcoming SDE', 'anno.jpg'),
+(14, 'Anuj Barve', 'a@m.com', 'New york', '465465454', 'a', '$2y$10$buDS1vIWONPYkPWBmc5/ZuHMuo3AhQ5dJ7NL1LCOyXDBwRUlgYOSm', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', 'Hello there', 'anno.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -76,14 +106,14 @@ CREATE TABLE `users` (
   `userID` int(11) NOT NULL,
   `userName` varchar(128) NOT NULL,
   `userEmail` varchar(128) NOT NULL,
-  `userAddr` varchar(255) NOT NULL,
-  `userPhone` varchar(255) NOT NULL,
+  `userAddr` varchar(255) DEFAULT NULL,
+  `userPhone` varchar(255) DEFAULT NULL,
   `userUid` varchar(128) NOT NULL,
   `userPwd` varchar(128) NOT NULL,
   `user_ln` text DEFAULT NULL,
   `user_gh` text DEFAULT NULL,
-  `user_in` varchar(255) NOT NULL,
-  `user_tw` varchar(255) NOT NULL,
+  `user_in` varchar(255) DEFAULT NULL,
+  `user_tw` varchar(255) DEFAULT NULL,
   `user_desc` text DEFAULT NULL,
   `user_photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -93,7 +123,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `userName`, `userEmail`, `userAddr`, `userPhone`, `userUid`, `userPwd`, `user_ln`, `user_gh`, `user_in`, `user_tw`, `user_desc`, `user_photo`) VALUES
-(10, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', '102,bell avenue', '09604345549', 'alexg', '$2y$10$WNo.4qemsiuPgALbrl2u4u/97KOMZg3cmELw/rT/Tm2Vb7WvFDJKK', 'https://www.linkedin.com/', 'https://github.com/', 'https://github.com/anujbarve/', 'https://github.com/anujbarve/', 'Hello this is Anuj, I\'m an upcoming SDE', 'anno.png');
+(10, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', '102,bell avenue', '09604345549', 'alexg', '$2y$10$WNo.4qemsiuPgALbrl2u4u/97KOMZg3cmELw/rT/Tm2Vb7WvFDJKK', 'https://www.linkedin.com/', 'https://github.com/', 'https://github.com/anujbarve/', 'https://github.com/anujbarve/', 'Hello this is Anuj, I\'m an upcoming SDE', 'anno.jpg'),
+(14, 'Anuj Barve', 'a@m.com', 'New york', '465465454', 'a', '$2y$10$buDS1vIWONPYkPWBmc5/ZuHMuo3AhQ5dJ7NL1LCOyXDBwRUlgYOSm', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', 'Hello there', 'anno.png');
 
 -- --------------------------------------------------------
 
@@ -106,21 +137,23 @@ CREATE TABLE `user_files` (
   `name` varchar(255) DEFAULT NULL,
   `extension` varchar(255) DEFAULT NULL,
   `source_code` text DEFAULT NULL,
-  `user_name` varchar(255) DEFAULT NULL
+  `user_name` varchar(255) DEFAULT NULL,
+  `time_stamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user_files`
 --
 
-INSERT INTO `user_files` (`id`, `name`, `extension`, `source_code`, `user_name`) VALUES
-(11, 'LL_hello.cpp', '71', '#include <iostream>\r\n\r\nint main() {\r\n    std::cout << \"hello, world\" << std::endl;\r\n    return 0;\r\n}\r\n', 'lalex'),
-(7, 'LL_hello.py', '71', 'print(\"Hello lalex\")', 'lalex'),
-(8, 'LL_hello.js', '71', 'console.log(\"Hello using JS\");', 'lalex'),
-(9, 'LL_hello.java', '71', 'public class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"hello, world\");\r\n    }\r\n}\r\n', 'lalex'),
-(10, 'LL_hello.c', '71', '// Powered by Judge0\r\n#include <stdio.h>\r\n\r\nint main(void) {\r\n    printf(\"Hello Judge0!\\n\");\r\n    return 0;\r\n}', 'lalex'),
-(23, 'hello.py', '71', 'print(\"Hello World\")', 'alexg'),
-(24, 'hello.js', '63', 'console.log(\"HEHEHE\");', 'alexg');
+INSERT INTO `user_files` (`id`, `name`, `extension`, `source_code`, `user_name`, `time_stamp`) VALUES
+(11, 'LL_hello.cpp', '71', '#include <iostream>\r\n\r\nint main() {\r\n    std::cout << \"hello, world\" << std::endl;\r\n    return 0;\r\n}\r\n', 'lalex', '2023-04-16 13:34:02'),
+(7, 'LL_hello.py', '71', 'print(\"Hello lalex\")', 'lalex', '2023-04-16 13:34:02'),
+(8, 'LL_hello.js', '71', 'console.log(\"Hello using JS\");', 'lalex', '2023-04-16 13:34:02'),
+(9, 'LL_hello.java', '71', 'public class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"hello, world\");\r\n    }\r\n}\r\n', 'lalex', '2023-04-16 13:34:02'),
+(10, 'LL_hello.c', '71', '// Powered by Judge0\r\n#include <stdio.h>\r\n\r\nint main(void) {\r\n    printf(\"Hello Judge0!\\n\");\r\n    return 0;\r\n}', 'lalex', '2023-04-16 13:34:02'),
+(23, 'hello.py', '71', 'print(\"Hello World\")', 'alexg', '2023-04-16 13:34:02'),
+(24, 'hello.js', '63', 'console.log(\"HEHEHE\");', 'alexg', '2023-04-16 13:34:02'),
+(28, 'newone.c', '50', '#include <stdio.h>\n\nint main()\n{\n    printf(\"Hello Anuj\");\n}', 'a', '2023-04-16 13:34:02');
 
 -- --------------------------------------------------------
 
@@ -162,6 +195,12 @@ ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `teachers`
+--
+ALTER TABLE `teachers`
+  ADD PRIMARY KEY (`teacherID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -196,16 +235,22 @@ ALTER TABLE `contact`
   MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `teachers`
+--
+ALTER TABLE `teachers`
+  MODIFY `teacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_files`
 --
 ALTER TABLE `user_files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_posts`
