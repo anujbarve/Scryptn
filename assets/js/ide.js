@@ -33,7 +33,7 @@ function saveCode() {
     data: {
       lang: $("#formlang").val(),
       scode: editor.getSession().getValue(),
-      filename: $("formfilename").val(),
+      filename: $("#filename").val(),
     },
     success: function (response) {
       $(".output").html(response);

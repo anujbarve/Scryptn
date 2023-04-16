@@ -189,7 +189,7 @@ $stdin_enc = base64_encode($stdin);
 $curl = curl_init();
 
 curl_setopt_array($curl, [
-    CURLOPT_URL => "http://172.19.0.1:2358/submissions?base64_encoded=true&fields=*",
+    CURLOPT_URL => "http://172.17.0.1:2358/submissions?base64_encoded=true&fields=*",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_ENCODING => "",
@@ -223,7 +223,7 @@ if ($err) {
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => "http://172.19.0.1:2358/submissions/$token_name?base64_encoded=true&fields=*",
+        CURLOPT_URL => "http://172.17.0.1:2358/submissions/$token_name?base64_encoded=true&fields=*",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_ENCODING => "",

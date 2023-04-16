@@ -184,7 +184,7 @@ include './checker.php';
                             <div class="row mb-3">
                               <label for="inputText" id="formfilename" class="col-sm-4 col-form-label">File Name</label>
                               <div class="col-sm-8">
-                                <input type="text" name="filename" class="form-control">
+                                <input type="text" id="filename" name="filename" class="form-control">
                               </div>
                             </div>
 
