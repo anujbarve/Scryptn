@@ -82,6 +82,23 @@ function createUser($conn,$name,$email,$username,$pwd){
 }
 
 
+function createTeacher($conn,$name,$email,$username,$pwd){
+    $sql = "INSERT INTO teachers (teacherName,teacherEmail,teacherUid,teacherPwd) VALUES (?,?,?,?) ";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt,$sql)) {
+        header("location: ../teacher/register.php?message=stmtfailed");
+        exit();
+    }
+
+    $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
+
+    mysqli_stmt_bind_param($stmt,"ssss",$name,$email,$username,$hashedPwd);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../teacher/register.php?message=user_created_successfully");
+    exit();
+}
+
 function createUserByAdmin($conn,$name,$email,$username,$pwd){
     $sql = "INSERT INTO users (userName,userEmail,userUid,userPwd) VALUES (?,?,?,?) ";
     $stmt = mysqli_stmt_init($conn);
@@ -134,12 +151,34 @@ function loginUser($conn,$username,$pwd){
     }
 }
 
+function loginTeacher($conn,$username,$pwd){
+    $uidExist = uidExistsTeacher($conn,$username,$username);
+
+    if ($uidExist === false) {
+        header("location: ../teacher/login.php?message=uid_doesnt_exist");
+        exit();
+    }
+
+    $pwdHashed = $uidExist["teacherPwd"];
+    $checkPwd = password_verify($pwd,$pwdHashed);
+
+    if($checkPwd === false){
+        header("location: ../teacher/login.php?message=wronglogin");
+        exit();
+    }else if($checkPwd === true){
+        session_start();
+        $_SESSION["userID"] = $uidExist["userID"];
+        $_SESSION["userUid"] = $uidExist["userUid"];
+        header("location: ../teacher/index.php");
+        exit();
+    }
+}
 
 function uidExistsTeacher($conn,$username,$email){
-    $sql = "SELECT * FROM admins WHERE username = ? OR email = ?";
+    $sql = "SELECT * FROM teachers WHERE teacherUid = ? OR teacherEmail = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
-        header("location: ./login.php?message=stmtfailed");
+        header("location: ../teacher/login.php?message=stmtfailed");
         exit();
     }
 

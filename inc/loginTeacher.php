@@ -12,7 +12,7 @@ if(isset($_POST["submit"])){
         exit();
     }
 
-    loginAdmin($conn,$username,$pwd);
+    loginTeacher($conn,$username,$pwd);
 }else{
     header("location: ../login.php");
     exit();
