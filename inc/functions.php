@@ -167,8 +167,8 @@ function loginTeacher($conn,$username,$pwd){
         exit();
     }else if($checkPwd === true){
         session_start();
-        $_SESSION["userID"] = $uidExist["userID"];
-        $_SESSION["userUid"] = $uidExist["userUid"];
+        $_SESSION["teacherID"] = $uidExist["teacherID"];
+        $_SESSION["teacherUid"] = $uidExist["teacherUid"];
         header("location: ../teacher/index.php");
         exit();
     }

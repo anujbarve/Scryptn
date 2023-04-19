@@ -3,7 +3,7 @@
 session_start();
 
 ?>
-<?php include '../inc/checker.php'; ?>
+<?php include '../inc/teacherChecker.php'; ?>
 
 
 <!DOCTYPE html>
