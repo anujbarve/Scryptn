@@ -82,9 +82,9 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
       }
 
-      $id = $_SESSION["userID"];
+      $id = $_SESSION["teacherID"];
 
-      $query = "SELECT * FROM `users` WHERE userID = $id";
+      $query = "SELECT * FROM `teachers` WHERE teacherID = $id";
 
       $result = $conn->query($query);
 
@@ -97,14 +97,14 @@ session_start();
         <div class="col-xl-4">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="../inc/user-data/profile-photos/<?php if($data["user_photo"]){echo $data["user_photo"];}else{echo "../assets/img/profile-img.jpg";};?>" alt="Profile" class="rounded-circle" />
-              <h2><?php echo $data["userName"]; ?></h2>
-              <h3><?php echo $data["user_desc"]; ?></h3>
+              <img src="../inc/user-data/profile-photos/<?php if($data["teacher_photo"]){echo $data["teacher_photo"];}else{echo "../assets/img/profile-img.jpg";};?>" alt="Profile" class="rounded-circle" />
+              <h2><?php echo $data["teacherName"]; ?></h2>
+              <h3><?php echo $data["teacher_desc"]; ?></h3>
               <div class="social-links mt-2">
-                <a href="<?php echo $data["user_tw"]; ?>" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="<?php echo $data["user_gh"]; ?>" class="github"><i class="bi bi-github"></i></a>
-                <a href="<?php echo $data["user_in"]; ?>" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="<?php echo $data["user_ln"]; ?>" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <a href="<?php echo $data["teacher_tw"]; ?>" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="<?php echo $data["teacher_gh"]; ?>" class="github"><i class="bi bi-github"></i></a>
+                <a href="<?php echo $data["teacher_in"]; ?>" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="<?php echo $data["teacher_ln"]; ?>" class="linkedin"><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
           </div>
@@ -187,32 +187,32 @@ session_start();
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
                   <p class="small fst-italic">
-                    <?php echo $data["user_desc"];?>
+                    <?php echo $data["teacher_desc"];?>
                   </p>
 
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $data["userName"];?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $data["teacherName"];?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
                     <div class="col-lg-9 col-md-8">
-                    <?php echo $data["userAddr"];?>
+                    <?php echo $data["teacherAddr"];?>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $data["userPhone"];?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $data["teacherPhone"];?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
                     <div class="col-lg-9 col-md-8">
-                    <?php echo $data["userEmail"];?>
+                    <?php echo $data["teacherEmail"];?>
                     </div>
                   </div>
                 </div>
@@ -243,74 +243,74 @@ session_start();
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fname" type="text" class="form-control" id="fname" value="<?php echo $data["userName"];?>" />
+                        <input name="fname" type="text" class="form-control" id="fname" value="<?php echo $data["teacherName"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">User Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userUid" type="text" class="form-control" id="userUid" value="<?php echo $data["userUid"];?>" />
+                        <input name="userUid" type="text" class="form-control" id="userUid" value="<?php echo $data["teacherUid"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="user_desc" class="form-control" id="user_desc" style="height: 100px"><?php echo $data["user_desc"];?></textarea>
+                        <textarea name="user_desc" class="form-control" id="user_desc" style="height: 100px"><?php echo $data["teacher_desc"];?></textarea>
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userAddr" type="text" class="form-control" id="userAddr" value="<?php echo $data["userAddr"];?>" />
+                        <input name="userAddr" type="text" class="form-control" id="userAddr" value="<?php echo $data["teacherAddr"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userPhone" type="number" class="form-control" id="userPhone" value="<?php echo $data["userPhone"];?>" />
+                        <input name="userPhone" type="number" class="form-control" id="userPhone" value="<?php echo $data["teacherPhone"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userEmail" type="email" class="form-control" id="userEmail" value="<?php echo $data["userEmail"];?>" />
+                        <input name="userEmail" type="email" class="form-control" id="userEmail" value="<?php echo $data["teacherEmail"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Github Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_gh" type="text" class="form-control" id="user_gh" value="<?php echo $data["user_gh"];?>" />
+                        <input name="user_gh" type="text" class="form-control" id="user_gh" value="<?php echo $data["teacher_gh"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_tw" type="text" class="form-control" id="user_tw" value="<?php echo $data["user_tw"];?>" />
+                        <input name="user_tw" type="text" class="form-control" id="user_tw" value="<?php echo $data["teacher_tw"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_in" type="text" class="form-control" id="user_in" value="<?php echo $data["user_in"];?>" />
+                        <input name="user_in" type="text" class="form-control" id="user_in" value="<?php echo $data["teacher_in"];?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_ln" type="text" class="form-control" id="user_ln" value="<?php echo $data["user_ln"];?>" />
+                        <input name="user_ln" type="text" class="form-control" id="user_ln" value="<?php echo $data["teacher_ln"];?>" />
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" name="submit" class="btn btn-primary">
+                      <button type="submit" name="teachersubmit" class="btn btn-primary">
                         Save Changes
                       </button>
                     </div>
