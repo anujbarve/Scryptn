@@ -97,7 +97,7 @@ session_start();
         <div class="col-xl-4">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="../inc/user-data/profile-photos/<?php if($data["teacher_photo"]){echo $data["teacher_photo"];}else{echo "../assets/img/profile-img.jpg";};?>" alt="Profile" class="rounded-circle" />
+              <img src="../inc/user-data/profile-photos/<?php if($data["teacher_photo"]){echo $data["teacher_photo"];}else{echo "default.jpg";};?>" alt="Profile" class="rounded-circle" />
               <h2><?php echo $data["teacherName"]; ?></h2>
               <h3><?php echo $data["teacher_desc"]; ?></h3>
               <div class="social-links mt-2">

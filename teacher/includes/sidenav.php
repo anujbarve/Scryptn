@@ -27,6 +27,13 @@
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="students.php">
+          <i class="ri-account-circle-fill"></i>
+          <span>Registered Students</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="queries.php">
           <i class="bi bi-envelope"></i>
           <span>Queries By Students</span>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 16, 2023 at 07:41 PM
+-- Generation Time: May 04, 2023 at 06:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -58,14 +58,6 @@ CREATE TABLE `contact` (
   `status` int(32) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `contact`
---
-
-INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `message`, `time`, `status`) VALUES
-(1, 'Anuj Vinod Barve', 'vinodbarve19@gmail.com', 'Site is finally live ', 'Site is finally live \r\nyayyyy!!!', '2022-05-30 06:40:40', 1),
-(2, 'Alex', 'alex@mail.com', 'Congratulations', 'Congratulations on making the website live my friend', '2022-05-30 06:47:09', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -93,8 +85,7 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`teacherID`, `teacherName`, `teacherEmail`, `teacherAddr`, `teacherPhone`, `teacherUid`, `teacherPwd`, `teacher_ln`, `teacher_gh`, `teacher_in`, `teacher_tw`, `teacher_desc`, `teacher_photo`) VALUES
-(10, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', '102,bell avenue', '09604345549', 'alexg', '$2y$10$WNo.4qemsiuPgALbrl2u4u/97KOMZg3cmELw/rT/Tm2Vb7WvFDJKK', 'https://www.linkedin.com/', 'https://github.com/', 'https://github.com/anujbarve/', 'https://github.com/anujbarve/', 'Hello this is Anuj, I\'m an upcoming SDE', 'anno.jpg'),
-(14, 'Anuj Barve', 'a@m.com', 'New york', '465465454', 'a', '$2y$10$buDS1vIWONPYkPWBmc5/ZuHMuo3AhQ5dJ7NL1LCOyXDBwRUlgYOSm', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', 'Hello there', 'anno.png');
+(1, 'Teacher', 'teacher@mail.com', NULL, NULL, 'teacher', '$2y$10$LQMRxn4szY9XCX2theZHwudnMG7b//BbBLC1ikpVxL0xX3NXTs4jq', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -115,16 +106,21 @@ CREATE TABLE `users` (
   `user_in` varchar(255) DEFAULT NULL,
   `user_tw` varchar(255) DEFAULT NULL,
   `user_desc` text DEFAULT NULL,
-  `user_photo` varchar(255) DEFAULT NULL
+  `user_photo` varchar(255) DEFAULT NULL,
+  `last_login` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `userName`, `userEmail`, `userAddr`, `userPhone`, `userUid`, `userPwd`, `user_ln`, `user_gh`, `user_in`, `user_tw`, `user_desc`, `user_photo`) VALUES
-(10, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', '102,bell avenue', '09604345549', 'alexg', '$2y$10$WNo.4qemsiuPgALbrl2u4u/97KOMZg3cmELw/rT/Tm2Vb7WvFDJKK', 'https://www.linkedin.com/', 'https://github.com/', 'https://github.com/anujbarve/', 'https://github.com/anujbarve/', 'Hello this is Anuj, I\'m an upcoming SDE', 'anno.jpg'),
-(14, 'Anuj Barve', 'a@m.com', 'New york', '465465454', 'a', '$2y$10$buDS1vIWONPYkPWBmc5/ZuHMuo3AhQ5dJ7NL1LCOyXDBwRUlgYOSm', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', ' https://github.com/anujbarve/', 'Hello there', 'anno.png');
+INSERT INTO `users` (`userID`, `userName`, `userEmail`, `userAddr`, `userPhone`, `userUid`, `userPwd`, `user_ln`, `user_gh`, `user_in`, `user_tw`, `user_desc`, `user_photo`, `last_login`) VALUES
+(1, 'Anuj Barve', 'anujbarve27@gmail.com', 'Nashik Road', '9604345549', 'anujbarve', '$2y$10$bhzgfcwM9.RtcG5qZ1GysOzHEKnC4W1ZZciZ5WJK1ioFi.R6vW2dm', 'https://in.linkedin.com/in/anuj-barve-838b9b162', 'https://github.com/anujbarve/', 'https://www.instagram.com/anuj_barve/', 'https://twitter.com/BarveAnuj', 'Hello I\'m Anuj Barve, An Aspiring Web Developer', 'pfp.jpg', 1683216779),
+(2, 'Pratik Rahane', 'pratikrahane@gmail.com', '', '', 'pratikrahane', '$2y$10$qU1SuYDVzyqWxDdbn2ec3eYA3uUOEihZvYR/VZ/trYWORGb4dcb22', '', '', '', '', '', NULL, NULL),
+(3, 'Om Thorat', 'omthorat@gmail.com', NULL, NULL, 'omthorat', '$2y$10$j40GIO1PU.3g7B8uoCWd3OJvErCKGlnZN4TVvI1l/o29nDV.Ez30S', NULL, NULL, NULL, NULL, NULL, NULL, 1683214610),
+(4, 'Dhiraj Yadav', 'dhirajyadav@gmail.com', NULL, NULL, 'dhirajyadav', '$2y$10$/tGEMK1tbNg4CeHjv6Vefe3nH.xgb8FKeJBRCXQnM3J1XgIy8eJZm', NULL, NULL, NULL, NULL, NULL, NULL, 1683214701),
+(5, 'Swarali Surve', 'swaralisurve@gmail.com', NULL, NULL, 'swaralisurve', '$2y$10$TG44Va8HmoBPMMQtRJbLcueRDUv9f5YslZf.uXeVFPwP3/k77QyDy', NULL, NULL, NULL, NULL, NULL, NULL, 1683214836),
+(6, 'Ishwari Yadav', 'ishwariyadav@gmail.com', NULL, NULL, 'ishwariyadav', '$2y$10$SLU7.nBgkfijYEv3iWIGCO/ObECw9wqwFQciEU8eczhO0QJwU71Zy', NULL, NULL, NULL, NULL, NULL, NULL, 1683214934);
 
 -- --------------------------------------------------------
 
@@ -146,14 +142,7 @@ CREATE TABLE `user_files` (
 --
 
 INSERT INTO `user_files` (`id`, `name`, `extension`, `source_code`, `user_name`, `time_stamp`) VALUES
-(11, 'LL_hello.cpp', '71', '#include <iostream>\r\n\r\nint main() {\r\n    std::cout << \"hello, world\" << std::endl;\r\n    return 0;\r\n}\r\n', 'lalex', '2023-04-16 13:34:02'),
-(7, 'LL_hello.py', '71', 'print(\"Hello lalex\")', 'lalex', '2023-04-16 13:34:02'),
-(8, 'LL_hello.js', '71', 'console.log(\"Hello using JS\");', 'lalex', '2023-04-16 13:34:02'),
-(9, 'LL_hello.java', '71', 'public class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"hello, world\");\r\n    }\r\n}\r\n', 'lalex', '2023-04-16 13:34:02'),
-(10, 'LL_hello.c', '71', '// Powered by Judge0\r\n#include <stdio.h>\r\n\r\nint main(void) {\r\n    printf(\"Hello Judge0!\\n\");\r\n    return 0;\r\n}', 'lalex', '2023-04-16 13:34:02'),
-(23, 'hello.py', '71', 'print(\"Hello World\")', 'alexg', '2023-04-16 13:34:02'),
-(24, 'hello.js', '63', 'console.log(\"HEHEHE\");', 'alexg', '2023-04-16 13:34:02'),
-(28, 'newone.c', '50', '#include <stdio.h>\n\nint main()\n{\n    printf(\"Hello Anuj\");\n}', 'a', '2023-04-16 13:34:02');
+(1, 'Hello World In CPP', '52', '#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n    cout<<\"Hello World\";\n}', 'anujbarve', '2023-05-04 15:56:30');
 
 -- --------------------------------------------------------
 
@@ -170,13 +159,6 @@ CREATE TABLE `user_posts` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_posts`
---
-
-INSERT INTO `user_posts` (`id`, `title`, `username`, `description`, `scode`, `date`, `fname`) VALUES
-(14, 'noice js', 'alexg', 'noice js', 'js', '2022-05-30 05:18:39', 'hello.js');
 
 --
 -- Indexes for dumped tables
@@ -238,19 +220,19 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `teacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `teacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_files`
 --
 ALTER TABLE `user_files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_posts`

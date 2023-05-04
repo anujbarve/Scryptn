@@ -97,7 +97,7 @@ session_start();
         <div class="col-xl-4">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="../inc/user-data/profile-photos/<?php if($data["user_photo"]){echo $data["user_photo"];}else{echo "../assets/img/profile-img.jpg";};?>" alt="Profile" class="rounded-circle" />
+              <img src="../inc/user-data/profile-photos/<?php if($data["user_photo"]){echo $data["user_photo"];}else{echo "default.jpg";};?>" alt="Profile" class="rounded-circle" />
               <h2><?php echo $data["userName"]; ?></h2>
               <h3><?php echo $data["user_desc"]; ?></h3>
               <div class="social-links mt-2">
@@ -157,7 +157,8 @@ session_start();
                         <th scope="col">Icon</th>
                         <th scope="col">File Name</th>
                         <th scope="col">Date Created</th>
-                        <th scope="col">Operations</th>
+                        <th scope="col">Open</th>
+                        <th scope="col">Delete</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -170,7 +171,8 @@ session_start();
                           echo "<th scope='row'>" . $row['extension'] . "</th>";
                           echo "<td>" . $row['name'] . "</td>";
                           echo "<td>" . $row['time_stamp'] . "</td>";
-                          echo "<td>open/delete</td>";
+                          echo "<td><a href='index.php?filename=" . $row['id'] . "'><button type='button' class='btn btn-success rounded-pill'>Open</button></a></td>";
+                          echo "<td><a href='../inc/deletefile.php?id=" . $row['id'] . "'><button type='button' class='btn btn-danger rounded-pill'>Delete</button></a></td>";
                           echo "</tr>";
                         }
                       } else {

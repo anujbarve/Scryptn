@@ -3,6 +3,30 @@
 include './checker.php';
 
 ?>
+<?php
+
+require '../inc/db.php';
+
+if (isset($_GET['file'])) {
+    $_SESSION['scode'] = "";
+    $_SESSION['filename'] = "";
+    $_SESSION['input'] = "";
+    $_SESSION["final_output"] = "";
+    $_SESSION['fname'] = "";
+} else {
+    if (isset($_GET['filename'])) {
+        $fname = $_GET['filename'];
+        $result = mysqli_query($conn, "SELECT * FROM `user_files` WHERE `id` = '$fname'");
+        $row = mysqli_fetch_array($result);
+        $status = 1;
+    } elseif (isset($_SESSION['fname'])) {
+        $fname = $_SESSION['fname'];
+        $result = mysqli_query($conn, "SELECT * FROM `user_files` WHERE `name` = '$fname'");
+        $row = mysqli_fetch_array($result);
+        $status = 1;
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +129,7 @@ include './checker.php';
 
                   <div style="margin:20px"></div>
 
-                  <div class="editor" id="editor" style="height:60vh;font-size: 24px;"></div>
+                  <div class="editor" id="editor" style="height:60vh;font-size: 24px;"><?php if(isset($row["source_code"])){echo $row["source_code"];}?></div>
 
                   <!-- <div id="reportsChart"></div>
 
@@ -290,6 +314,22 @@ include './checker.php';
   <script src="../assets/ace/ace.js"></script>
   <script src="../assets/ace/theme-monokai.js"></script>
   <script src="../assets/ace/theme-github.js"></script>
+  <script>
+        function updateUserStatus()
+        {
+            jQuery.ajax({
+                url:'update_user_status.php',
+                success:function()
+                {
+
+                }
+            })
+        }
+
+        setInterval(function (){
+            updateUserStatus();
+        }, 10000);
+    </script>
 
 </body>
 
