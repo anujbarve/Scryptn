@@ -1,3 +1,29 @@
+<?php 
+
+require_once './inc/db.php';
+
+$name = $_POST['name']; 
+$email = $_POST['email']; 
+$subject = $_POST['subject']; 
+$message = mysqli_real_escape_string($conn,$_POST['message']);
+
+
+if(isset($_POST['submit'])){
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+  $sql = "INSERT INTO `contact`(`name`, `email`, `subject`, `message`) VALUES ('$name','$email','$subject','$message')";
+  
+  if ($conn->query($sql) === TRUE) {
+    header("location: index.php?message=query_success");
+  } else {
+    header("location: index.php?message=query_failed");
+  }
+  
+  $conn->close();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +31,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Scryptn - Index</title>
+  <title>SCRYPTN - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -36,7 +62,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="" alt="">
-        <span>Scryptn</span>
+        <span>SCRYPTN</span>
       </a>
 
       <nav id="navbar" class="navbar">
@@ -59,8 +85,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2>
+          <h1 data-aos="fade-up">SCRYPTN</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">The Ultimate Online Compiler and Assignment Submission System</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
               <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
@@ -87,10 +113,11 @@
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h3>Who We Are</h3>
-              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
+              <h2>Who We Are</h2>
               <p>
-                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+              At SCRYPTN, we understand that programming can be a challenging task, and sometimes, you need a little extra help to get your assignments done on time. That's why we've created a comprehensive online platform that offers both an online compiler and an assignment submission system.
+
+Our online compiler provides you with a seamless coding experience by enabling you to write, compile, and run code on a single platform, without the need for additional software installations. With support for multiple programming languages such as Python, Java, C++, and more, you can write code effortlessly and quickly.
               </p>
               <div class="text-center text-lg-start">
                 <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
@@ -116,8 +143,7 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h2>Our Values</h2>
-          <p>Odit est perspiciatis laborum et dicta</p>
+          <p>Core Features</p>
         </header>
 
         <div class="row">
@@ -125,24 +151,24 @@
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="box">
               <img src="home/assets/img/values-1.png" class="img-fluid" alt="">
-              <h3>Ad cupiditate sed est odio</h3>
-              <p>Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit. Et veritatis id.</p>
+              <h3>Online Compiler </h3>
+              <p>SCRYPTN offers an online compiler that enables users to write, compile, and run code on a single platform, without the need for any additional software installations. The online compiler supports multiple programming languages, including Python, Java, C++, and more.</p>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
             <div class="box">
               <img src="home/assets/img/values-2.png" class="img-fluid" alt="">
-              <h3>Voluptatem voluptatum alias</h3>
-              <p>Repudiandae amet nihil natus in distinctio suscipit id. Doloremque ducimus ea sit non.</p>
+              <h3>Assignment Submission System</h3>
+              <p>SCRYPTN's assignment submission system allows students to submit their programming assignments quickly and easily. The submission system is user-friendly and secure, ensuring that students can submit their assignments on time and without any hassle.</p>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
             <div class="box">
               <img src="home/assets/img/values-3.png" class="img-fluid" alt="">
-              <h3>Fugit cupiditate alias nobis.</h3>
-              <p>Quam rem vitae est autem molestias explicabo debitis sint. Vero aliquid quidem commodi.</p>
+              <h3>User-Friendly Interface</h3>
+              <p>SCRYPTN's platform is designed to be user-friendly, reliable, and easy to use. The interface is intuitive, making it the ideal choice for students, beginners, and experts alike. With SCRYPTN, users can focus on coding and not on navigating a complicated platform.</p>
             </div>
           </div>
 
@@ -153,7 +179,7 @@
     </section><!-- End Values Section -->
 
     <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
+    <!-- <section id="counts" class="counts">
       <div class="container" data-aos="fade-up">
 
         <div class="row gy-4">
@@ -163,7 +189,7 @@
               <i class="bi bi-emoji-smile"></i>
               <div>
                 <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Happy Clients</p>
+                <p>Students</p>
               </div>
             </div>
           </div>
@@ -201,7 +227,7 @@
         </div>
 
       </div>
-    </section><!-- End Counts Section -->
+    </section>End Counts Section -->
 
 
     <!-- ======= F.A.Q Section ======= -->
@@ -221,12 +247,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    Non consectetur a erat nam at lectus urna duis?
+                  What programming languages are supported by SCRYPTN's online compiler?
                   </button>
                 </h2>
                 <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                  SCRYPTN's online compiler supports multiple programming languages, including Python, Java, C++, JavaScript, and more.
                   </div>
                 </div>
               </div>
@@ -234,12 +260,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
+                  Can I submit my programming assignments on SCRYPTN?
                   </button>
                 </h2>
                 <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  Yes, SCRYPTN has an assignment submission system that allows students to submit their programming assignments quickly and easily
                   </div>
                 </div>
               </div>
@@ -247,12 +273,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                  Is SCRYPTN's submission system secure?
                   </button>
                 </h2>
                 <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                  Yes, SCRYPTN's submission system is designed to be secure, ensuring that students can submit their assignments without any risk of unauthorized access or data breaches.
                   </div>
                 </div>
               </div>
@@ -268,12 +294,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                  Do I need to download any software to use SCRYPTN?
                   </button>
                 </h2>
                 <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                   <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  No, you do not need to download any software to use SCRYPTN's online compiler or assignment submission system. Simply log in to our platform and start coding!
                   </div>
                 </div>
               </div>
@@ -281,12 +307,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
+                  Is SCRYPTN's platform user-friendly?
                   </button>
                 </h2>
                 <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                   <div class="accordion-body">
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                  Yes, SCRYPTN's platform is designed to be user-friendly, making it an ideal choice for students, beginners, and experts alike.
                   </div>
                 </div>
               </div>
@@ -294,12 +320,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
-                    Varius vel pharetra vel turpis nunc eget lorem dolor?
+                  Can I use SCRYPTN for free?
                   </button>
                 </h2>
                 <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                   <div class="accordion-body">
-                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+                  Yes, SCRYPTN offers a free plan that includes access to our online compiler and assignment submission system.
                   </div>
                 </div>
               </div>
@@ -326,6 +352,25 @@
 
         <div class="row gy-4">
 
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="./assets/img/anuj_met.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href="https://twitter.com/BarveAnuj"><i class="bi bi-twitter"></i></a>
+                  <a href="tel:9604345549"><i class="bi bi-phone"></i></a>
+                  <a href="https://www.instagram.com/anuj_barve/"><i class="bi bi-instagram"></i></a>
+                  <a href="https://in.linkedin.com/in/anuj-barve-838b9b162"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Anuj Barve</h4>
+                <span>Lead Developer</span>
+                <p>Web and App Developer | Flutter Enthusiast | Student | Aspiring Computer Engineer | Introvert / Extrovert Depends on the situation ; )</p>
+              </div>
+            </div>
+          </div>
+
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
@@ -348,7 +393,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
               <div class="member-img">
-                <img src="home/assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -367,7 +412,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
               <div class="member-img">
-                <img src="home/assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -377,35 +422,18 @@
               </div>
               <div class="member-info">
                 <h4>Om Thorat</h4>
-                <span>CTO</span>
+                <span>Team Member</span>
                 <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-            <div class="member">
-              <div class="member-img">
-                <img src="home/assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Anuj Barve</h4>
-                <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
-              </div>
-            </div>
-          </div>
+          
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="home/assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -415,8 +443,8 @@
               </div>
               <div class="member-info">
                 <h4>Swarali Surve</h4>
-                <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
+                <span>Team Member</span>
+                <p></p>
               </div>
             </div>
           </div>
@@ -424,7 +452,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="home/assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -434,8 +462,8 @@
               </div>
               <div class="member-info">
                 <h4>Ishwari Yadav</h4>
-                <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
+                <span>Team Member</span>
+                <p></p>
               </div>
             </div>
           </div>
@@ -467,21 +495,23 @@
                 <div class="info-box">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
-                  <p>A108 Adam Street,<br>New York, NY 535022</p>
+                  <p> MET BKC IOE<br>
+              Adgaon, Nashik<br>
+              Maharastra</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                  <p>+91 1234567890
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@example.com<br>contact@example.com</p>
+                  <p>info@scryptn.com</p>
                 </div>
               </div>
               <div class="col-md-6">
@@ -496,35 +526,35 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form">
-              <div class="row gy-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Contact Form</h5>
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+              <!-- Vertical Form -->
+              <form action="" method="POST" class="row g-3">
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Your Name</label>
+                  <input type="text" class="form-control" name="name">
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email">
                 </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Subject</label>
+                  <input type="text" class="form-control" name="subject">
                 </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Message</label>
+                  <input type="text" class="form-control" id="inputAddress" name="message">
                 </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
+                <div class="text-center">
+                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
+              </form><!-- Vertical Form -->
 
-              </div>
-            </form>
+            </div>
+          </div>
 
           </div>
 
@@ -546,9 +576,9 @@
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
               <img src="" alt="">
-              <span>Scryptn</span>
+              <span>SCRYPTN</span>
             </a>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <p>The Ultimate Online Compiler and Assignment Submission System</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -560,33 +590,21 @@
           <div class="col-lg-2 col-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.php">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.php#about">About us</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="./teacher/login.php">Teacher Login</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
 
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4>Contact Us</h4>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              MET BKC IOE<br>
+              Adgaon, Nashik<br>
+              Maharastra<br><br>
+              <strong>Phone:</strong> +91 1234567890<br>
+              <strong>Email:</strong> info@scryptn.com<br>
             </p>
 
           </div>
@@ -597,7 +615,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Scryptn 2023</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>SCRYPTN 2023</span></strong>. All Rights Reserved
       </div>
 
     </div>

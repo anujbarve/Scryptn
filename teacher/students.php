@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Components / Accordion - scryptn Bootstrap Template</title>
+    <title>Components / Accordion - SCRYPTN Bootstrap Template</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -145,7 +145,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>scryptn</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>SCRYPTN</span></strong>. All Rights Reserved
         </div>
 
     </footer><!-- End Footer -->

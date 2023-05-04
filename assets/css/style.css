@@ -1,5 +1,5 @@
 /**
-* Template Name: scryptn
+* Template Name: SCRYPTN
 * Updated: Mar 09 2023 with Bootstrap v5.2.3
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
 * Author: BootstrapMade.com

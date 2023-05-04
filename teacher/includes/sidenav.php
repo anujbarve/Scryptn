@@ -41,7 +41,7 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.php">
+        <a class="nav-link collapsed" href="../index.php#about">
           <i class="bx bxs-info-square"></i>
           <span>About Us</span>
         </a>

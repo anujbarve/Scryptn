@@ -1,3 +1,29 @@
+<?php 
+
+require_once '../inc/db.php';
+
+$name = $_POST['name']; 
+$email = $_POST['email']; 
+$subject = $_POST['subject']; 
+$message = mysqli_real_escape_string($conn,$_POST['message']);
+
+
+if(isset($_POST['submit'])){
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+  $sql = "INSERT INTO `contact`(`name`, `email`, `subject`, `message`) VALUES ('$name','$email','$subject','$message')";
+  
+  if ($conn->query($sql) === TRUE) {
+    header("location: pages-contact.php?message=query_success");
+  } else {
+    header("location: pages-contact.php?message=query_failed");
+  }
+  
+  $conn->close();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +31,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Contact - scryptn Bootstrap Template</title>
+  <title>Pages / Contact - SCRYPTN Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -95,36 +121,34 @@
         </div>
 
         <div class="col-xl-6">
-          <div class="card p-4">
-            <form action="forms/contact.php" method="post" class="php-email-form">
-              <div class="row gy-4">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Contact Form</h5>
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+              <!-- Vertical Form -->
+              <form action="" method="POST" class="row g-3">
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Your Name</label>
+                  <input type="text" class="form-control" name="name">
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email">
                 </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Password</label>
+                  <input type="text" class="form-control" name="subject">
                 </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Message</label>
+                  <input type="text" class="form-control" id="inputAddress" name="message">
                 </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
+                <div class="text-center">
+                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
+              </form><!-- Vertical Form -->
 
-              </div>
-            </form>
+            </div>
           </div>
 
         </div>
@@ -138,7 +162,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>scryptn</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>SCRYPTN</span></strong>. All Rights Reserved
     </div>
    
   </footer><!-- End Footer -->
