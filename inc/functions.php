@@ -99,6 +99,23 @@ function createTeacher($conn,$name,$email,$username,$pwd){
     exit();
 }
 
+function createTeacherByAdmin($conn,$name,$email,$username,$pwd){
+    $sql = "INSERT INTO teachers (teacherName,teacherEmail,teacherUid,teacherPwd) VALUES (?,?,?,?) ";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt,$sql)) {
+        header("location: ../admin/manage_teachers.php?message=stmtfailed");
+        exit();
+    }
+
+    $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
+
+    mysqli_stmt_bind_param($stmt,"ssss",$name,$email,$username,$hashedPwd);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../admin/manage_teachers.php?message=user_created_successfully");
+    exit();
+}
+
 function createUserByAdmin($conn,$name,$email,$username,$pwd){
     $sql = "INSERT INTO users (userName,userEmail,userUid,userPwd) VALUES (?,?,?,?) ";
     $stmt = mysqli_stmt_init($conn);
@@ -112,7 +129,23 @@ function createUserByAdmin($conn,$name,$email,$username,$pwd){
     mysqli_stmt_bind_param($stmt,"ssss",$name,$email,$username,$hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../admin/index.php?message=none");
+    header("location: ../admin/manage_students.php?message=none");
+    exit();
+}
+
+function createCourseByAdmin($conn,$cname,$cteacher)
+{
+    $sql = "INSERT INTO courses (course_name,course_teacher) VALUES (?,?) ";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt,$sql)) {
+        header("location: ../admin/add_course.php?message=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt,"ss",$cname,$cteacher);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../admin/manage_courses.php?message=none");
     exit();
 }
 
@@ -233,13 +266,14 @@ function loginAdmin($conn,$username,$pwd){
     $checkPwd = password_verify($pwd,$pwdHashed);
 
     if($checkPwd === false){
-        header("location: ./login.php?message=wronglogin");
+        header("location: ../admin/login.php?message=wronglogin");
         exit();
     }else if($checkPwd === true){
         session_start();
-        $_SESSION["username"] = $uidExist["username"];
-        $_SESSION["email"] = $uidExist["email"];
-        header("location: ./index.php?message=login_success");
+        $_SESSION["adminID"] = $uidExist["id"];
+        $_SESSION["adminUsername"] = $uidExist["username"];
+        $_SESSION["adminEmail"] = $uidExist["email"];
+        header("location: ../admin/index.php?message=login_success");
         exit();
     }
 }

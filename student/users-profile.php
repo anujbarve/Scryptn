@@ -312,7 +312,7 @@ session_start();
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" name="submit" class="btn btn-primary">
+                      <button type="submit" name="usersubmit" class="btn btn-primary">
                         Save Changes
                       </button>
                     </div>

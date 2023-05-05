@@ -43,10 +43,6 @@ if (isset($_POST["submit"])) {
   $pwd = $_POST["pwd"];
   $pwdrepeat = $_POST["pwdrepeat"];
 
-
-  require_once 'dbh.inc.php';
-  require_once 'functions.inc.php';
-
   if (emptyInputRegister($name,$email,$username,$pwd,$pwdrepeat) !== false) {
     header("location: ../admin/create.php?message=emptyInput");
     exit();
@@ -72,7 +68,7 @@ if (isset($_POST["submit"])) {
 
 }
 else{
-  header("location: ../register.php");
+  header("location: ../register.php?error");
 }
 
 ?>
