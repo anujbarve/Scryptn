@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 04, 2023 at 06:12 PM
+-- Generation Time: May 05, 2023 at 03:20 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,15 +32,24 @@ CREATE TABLE `admins` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `security_code` varchar(255) NOT NULL
+  `security_code` varchar(255) NOT NULL,
+  `admin_name` varchar(255) NOT NULL,
+  `admin_addr` varchar(255) DEFAULT NULL,
+  `admin_phone` varchar(255) DEFAULT NULL,
+  `admin_ln` text DEFAULT NULL,
+  `admin_in` text DEFAULT NULL,
+  `admin_gh` text DEFAULT NULL,
+  `admin_tw` text DEFAULT NULL,
+  `admin_desc` text DEFAULT NULL,
+  `admin_photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `username`, `password`, `email`, `security_code`) VALUES
-(1, 'admin02', '$2y$10$YOtOJiT0/iLSWwgffIQ7gOxYuWLubWHqKnrYFkYHYnaRhlrx7Ekjq', 'admin02@mail.com', '7596526');
+INSERT INTO `admins` (`id`, `username`, `password`, `email`, `security_code`, `admin_name`, `admin_addr`, `admin_phone`, `admin_ln`, `admin_in`, `admin_gh`, `admin_tw`, `admin_desc`, `admin_photo`) VALUES
+(1, 'admin02', '$2y$10$SLU7.nBgkfijYEv3iWIGCO/ObECw9wqwFQciEU8eczhO0QJwU71Zy', 'anujbarve27@gmail.com', '7596526', 'The BOSS', '102,bell avenue', '09604345549', 'asfd', 'asfd', 'asdfsfdasadf', 'asfdsfasdfa', 'asfdsadf', NULL);
 
 -- --------------------------------------------------------
 
@@ -57,6 +66,33 @@ CREATE TABLE `contact` (
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` int(32) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `message`, `time`, `status`) VALUES
+(6, 'Anuj', 'anujbarve27@gmail.com', 'SITE Almost Done', 'The website is almost complete', '2023-05-04 18:34:30', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL,
+  `course_name` varchar(255) NOT NULL,
+  `course_teacher` varchar(255) NOT NULL,
+  `assignments_no` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `course_name`, `course_teacher`, `assignments_no`) VALUES
+(2, 'Adv Java', 'Anuj Vinod Barve', 0);
 
 -- --------------------------------------------------------
 
@@ -85,7 +121,7 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`teacherID`, `teacherName`, `teacherEmail`, `teacherAddr`, `teacherPhone`, `teacherUid`, `teacherPwd`, `teacher_ln`, `teacher_gh`, `teacher_in`, `teacher_tw`, `teacher_desc`, `teacher_photo`) VALUES
-(1, 'Teacher', 'teacher@mail.com', NULL, NULL, 'teacher', '$2y$10$LQMRxn4szY9XCX2theZHwudnMG7b//BbBLC1ikpVxL0xX3NXTs4jq', NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', '102,bell avenue', '09604345549', 'teacher', '$2y$10$LQMRxn4szY9XCX2theZHwudnMG7b//BbBLC1ikpVxL0xX3NXTs4jq', 'https://in.linkedin.com/in/anuj-barve-838b9b162', 'https://github.com/anujbarve/', 'https://github.com/anujbarve/', ' https://github.com/anujbarve/', 'asfdasdfsd', NULL);
 
 -- --------------------------------------------------------
 
@@ -115,12 +151,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `userName`, `userEmail`, `userAddr`, `userPhone`, `userUid`, `userPwd`, `user_ln`, `user_gh`, `user_in`, `user_tw`, `user_desc`, `user_photo`, `last_login`) VALUES
-(1, 'Anuj Barve', 'anujbarve27@gmail.com', 'Nashik Road', '9604345549', 'anujbarve', '$2y$10$bhzgfcwM9.RtcG5qZ1GysOzHEKnC4W1ZZciZ5WJK1ioFi.R6vW2dm', 'https://in.linkedin.com/in/anuj-barve-838b9b162', 'https://github.com/anujbarve/', 'https://www.instagram.com/anuj_barve/', 'https://twitter.com/BarveAnuj', 'Hello I\'m Anuj Barve, An Aspiring Web Developer', 'pfp.jpg', 1683216779),
+(1, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', 'asdfasfd', '09604345549', 'anujbarve', '$2y$10$SLU7.nBgkfijYEv3iWIGCO/ObECw9wqwFQciEU8eczhO0QJwU71Zy', 'adfsafd', 'asfdasfd', 'asfasfd', 'asfsadf', 'asdfasfdsadfasfsdfasdfsadfdasfasdfsdafsadf', 'pfp.jpg', 1683292394),
 (2, 'Pratik Rahane', 'pratikrahane@gmail.com', '', '', 'pratikrahane', '$2y$10$qU1SuYDVzyqWxDdbn2ec3eYA3uUOEihZvYR/VZ/trYWORGb4dcb22', '', '', '', '', '', NULL, NULL),
 (3, 'Om Thorat', 'omthorat@gmail.com', NULL, NULL, 'omthorat', '$2y$10$j40GIO1PU.3g7B8uoCWd3OJvErCKGlnZN4TVvI1l/o29nDV.Ez30S', NULL, NULL, NULL, NULL, NULL, NULL, 1683214610),
 (4, 'Dhiraj Yadav', 'dhirajyadav@gmail.com', NULL, NULL, 'dhirajyadav', '$2y$10$/tGEMK1tbNg4CeHjv6Vefe3nH.xgb8FKeJBRCXQnM3J1XgIy8eJZm', NULL, NULL, NULL, NULL, NULL, NULL, 1683214701),
 (5, 'Swarali Surve', 'swaralisurve@gmail.com', NULL, NULL, 'swaralisurve', '$2y$10$TG44Va8HmoBPMMQtRJbLcueRDUv9f5YslZf.uXeVFPwP3/k77QyDy', NULL, NULL, NULL, NULL, NULL, NULL, 1683214836),
-(6, 'Ishwari Yadav', 'ishwariyadav@gmail.com', NULL, NULL, 'ishwariyadav', '$2y$10$SLU7.nBgkfijYEv3iWIGCO/ObECw9wqwFQciEU8eczhO0QJwU71Zy', NULL, NULL, NULL, NULL, NULL, NULL, 1683214934);
+(6, 'Ishwari Yadav', 'ishwariyadav@gmail.com', NULL, NULL, 'ishwariyadav', '$2y$10$SLU7.nBgkfijYEv3iWIGCO/ObECw9wqwFQciEU8eczhO0QJwU71Zy', NULL, NULL, NULL, NULL, NULL, NULL, 1683214934),
+(8, 'dedemo ', 'sdfgsdfg@mail.com', NULL, NULL, 'alex', '$2y$10$Ko0W19z/bB/ZvN/2h7a8EeHwVMSVAV4NBaWoHQgFdyVPi4hFxQgK2', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -142,7 +179,8 @@ CREATE TABLE `user_files` (
 --
 
 INSERT INTO `user_files` (`id`, `name`, `extension`, `source_code`, `user_name`, `time_stamp`) VALUES
-(1, 'Hello World In CPP', '52', '#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n    cout<<\"Hello World\";\n}', 'anujbarve', '2023-05-04 15:56:30');
+(1, 'Hello World In CPP', '52', '#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n    cout<<\"Hello World\";\n}', 'anujbarve', '2023-05-04 15:56:30'),
+(3, 'Python hello world', '71', 'print(\"Hello world\")', 'anujbarve', '2023-05-04 18:32:24');
 
 -- --------------------------------------------------------
 
@@ -174,6 +212,12 @@ ALTER TABLE `admins`
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -214,25 +258,31 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `teacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `teacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_files`
 --
 ALTER TABLE `user_files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_posts`
