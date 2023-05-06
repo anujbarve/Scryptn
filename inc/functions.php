@@ -149,6 +149,38 @@ function createCourseByAdmin($conn,$cname,$cteacher)
     exit();
 }
 
+function createAssignmentByTeacher($conn,$aname,$adesc,$acourse)
+{
+    $sql = "INSERT INTO assignments (assignment_name,assignment_desc,assigned_course) VALUES (?,?,?) ";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt,$sql)) {
+        header("location: ../teacher/add_assignment.php?message=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt,"sss",$aname,$adesc,$acourse);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../teacher/add_assignment.php?message=none");
+    exit();
+}
+
+function createAssignmentByAdmin($conn,$aname,$adesc,$acourse)
+{
+    $sql = "INSERT INTO assignments (assignment_name,assignment_desc,assigned_course) VALUES (?,?,?) ";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt,$sql)) {
+        header("location: ../admin/add_assignment.php?message=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt,"sss",$aname,$adesc,$acourse);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../admin/add_assignment.php?message=none");
+    exit();
+}
+
 // 
 
 function emptyInputLogin($username,$pwd){

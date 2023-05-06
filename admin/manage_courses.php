@@ -65,7 +65,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Assigned Teacher</th>
-                    <th scope="col">No of Assignments</th>
+                    <th scope="col">Operations</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -104,7 +104,7 @@
                         echo "<th scope='row'>".$row['id']."</th>";
                         echo "<td>".$row['course_name']."</td>";
                         echo "<td>".$row['course_teacher']."</td>";
-                        echo "<td>".$row['assignments_no']."</td>";
+                        echo "<td><a href='../inc/delete_course.php?id=" . $row['id'] . "'><button type='button' class='btn btn-danger'><i class='bi bi-trash'></i></button></a></td>";
                         echo "</tr>";
                     }
                 } else {

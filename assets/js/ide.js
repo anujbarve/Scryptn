@@ -41,6 +41,23 @@ function saveCode() {
   });
 }
 
+function submitAssignment() {
+  $.ajax({
+    url: "../inc/assignment_handler.php",
+    method: "POST",
+    data: {
+      assignment_name : $("#assignment_name").val(),
+      lang: $("#formlang").val(),
+      scode: editor.getSession().getValue(),
+      filename: $("#filename").val(),
+    },
+    success: function (response) {
+      $(".output").html(response);
+    },
+  });
+}
+
+
 function executeCode() {
   $.ajax({
       url:"../inc/compiler.php",

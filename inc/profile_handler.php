@@ -17,6 +17,7 @@ $inlink = mysqli_real_escape_string($conn, $_POST["user_in"]);
 $twlink = mysqli_real_escape_string($conn, $_POST["user_tw"]);
 $email = $_POST["userEmail"];
 $description = mysqli_real_escape_string($conn, $_POST["user_desc"]);
+$course = $_POST["course"];
 $image = $_FILES["image"]["name"];
 $tempname = $_FILES["image"]["tmp_name"];
 $folder = "./user-data/profile-photos/" . $image;
@@ -35,7 +36,7 @@ $folder = "./user-data/profile-photos/" . $image;
 // echo "IMAGE: ".$image."<br>";
 
 if ($image != null) {
-    $sql = "UPDATE `users` SET `userName`='$fname',`userEmail`='$email',`userAddr`='$address',`userPhone`='$phone',`userUid`='$uid',`user_ln`='$lnlink',`user_gh`='$gitlink',`user_in`='$inlink',`user_tw`='$twlink',`user_desc`='$description',`user_photo`='$image' WHERE `users`.`userID` = $id";
+    $sql = "UPDATE `users` SET `userName`='$fname',`userEmail`='$email',`userAddr`='$address',`userPhone`='$phone',`userUid`='$uid',`user_ln`='$lnlink',`user_gh`='$gitlink',`user_in`='$inlink',`user_tw`='$twlink',`user_desc`='$description',`assigned_course`='$course',`user_photo`='$image' WHERE `users`.`userID` = $id";
     mysqli_query($conn, $sql);
   
     if (move_uploaded_file($tempname, $folder)) {
@@ -47,7 +48,7 @@ if ($image != null) {
     header("location: ../student/users-profile.php");
     exit();
 } else {
-    $sql = "UPDATE `users` SET `userName`='$fname',`userEmail`='$email',`userAddr`='$address',`userPhone`='$phone',`userUid`='$uid',`user_ln`='$lnlink',`user_gh`='$gitlink',`user_in`='$inlink',`user_tw`='$twlink',`user_desc`='$description' WHERE `users`.`userID` = $id";
+    $sql = "UPDATE `users` SET `userName`='$fname',`userEmail`='$email',`userAddr`='$address',`userPhone`='$phone',`userUid`='$uid',`user_ln`='$lnlink',`user_gh`='$gitlink',`user_in`='$inlink',`user_tw`='$twlink',`user_desc`='$description',`assigned_course`='$course' WHERE `users`.`userID` = $id";
 
     mysqli_query($conn, $sql);
 
@@ -70,6 +71,7 @@ $inlink = mysqli_real_escape_string($conn, $_POST["user_in"]);
 $twlink = mysqli_real_escape_string($conn, $_POST["user_tw"]);
 $email = $_POST["userEmail"];
 $description = mysqli_real_escape_string($conn, $_POST["user_desc"]);
+$course = $_POST["course"];
 $image = $_FILES["image"]["name"];
 $tempname = $_FILES["image"]["tmp_name"];
 $folder = "./user-data/profile-photos/" . $image;
@@ -88,7 +90,7 @@ $folder = "./user-data/profile-photos/" . $image;
 // echo "IMAGE: ".$image."<br>";
 
 if ($image != null) {
-    $sql = "UPDATE `teachers` SET `teacherName`='$fname',`teacherEmail`='$email',`teacherAddr`='$address',`teacherPhone`='$phone',`teacherUid`='$uid',`teacher_ln`='$lnlink',`teacher_gh`='$gitlink',`teacher_in`='$inlink',`teacher_tw`='$twlink',`teacher_desc`='$description',`teacher_photo`='$image' WHERE `teachers`.`teacherID` = $id";
+    $sql = "UPDATE `teachers` SET `teacherName`='$fname',`teacherEmail`='$email',`teacherAddr`='$address',`teacherPhone`='$phone',`teacherUid`='$uid',`teacher_ln`='$lnlink',`teacher_gh`='$gitlink',`teacher_in`='$inlink',`teacher_tw`='$twlink',`teacher_desc`='$description',`assigned_course`='$course',`teacher_photo`='$image' WHERE `teachers`.`teacherID` = $id";
     mysqli_query($conn, $sql);
   
     if (move_uploaded_file($tempname, $folder)) {
@@ -100,7 +102,7 @@ if ($image != null) {
     header("location: ../teacher/profile.php");
     exit();
 } else {
-    $sql = "UPDATE `teachers` SET `teacherName`='$fname',`teacherEmail`='$email',`teacherAddr`='$address',`teacherPhone`='$phone',`teacherUid`='$uid',`teacher_ln`='$lnlink',`teacher_gh`='$gitlink',`teacher_in`='$inlink',`teacher_tw`='$twlink',`teacher_desc`='$description' WHERE `teachers`.`teacherID` = $id";
+    $sql = "UPDATE `teachers` SET `teacherName`='$fname',`teacherEmail`='$email',`teacherAddr`='$address',`teacherPhone`='$phone',`teacherUid`='$uid',`teacher_ln`='$lnlink',`teacher_gh`='$gitlink',`teacher_in`='$inlink',`teacher_tw`='$twlink',`teacher_desc`='$description',`assigned_course`='$course' WHERE `teachers`.`teacherID` = $id";
 
     mysqli_query($conn, $sql);
 

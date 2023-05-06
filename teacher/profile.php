@@ -254,6 +254,62 @@ session_start();
                       </div>
                     </div>
 
+                    
+                    <div class="row mb-3">
+                      <label class="col-sm-4 col-lg-3 col-form-label">Assigned Course</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select name="course" id="formlang" class="form-select" aria-label="Default select example">
+
+                          <?php
+
+
+                          $servername = "localhost";
+                          $username = "root";
+                          $password = "";
+                          $databasename = "scr";
+
+                          $conn = new mysqli(
+                            $servername,
+                            $username,
+                            $password,
+                            $databasename
+                          );
+
+                          if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                          }
+
+                          if (isset($data["assigned_course"])) {
+                            $course_id = $data["assigned_course"];
+                            $course_query = "SELECT * FROM `courses` WHERE `id` = '$course_id'";
+
+                            $time = time();
+  
+                            $course_file = $conn->query($course_query);
+  
+                            if ($course_file->num_rows > 0) {
+                              $crow = $course_file->fetch_assoc();
+                              $course_name = $crow["course_name"]; 
+                            }
+                            
+                            echo "<option selected value='$course_id'>$course_name</option>";
+                          }
+                          $query_file = "SELECT * FROM `courses`";
+
+                          $time = time();
+
+                          $result_file = $conn->query($query_file);
+
+                          if ($result_file->num_rows > 0) {
+                            while ($row = $result_file->fetch_assoc()) {
+                              echo "<option value='" . $row['id'] . "'>" . $row['course_name'] . "</option>";
+                            }
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">

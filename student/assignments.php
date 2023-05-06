@@ -1,9 +1,9 @@
 <?php
 
-include './checker.php';
+session_start();
 
 ?>
-
+<?php include '../inc/checker.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,141 +54,90 @@ include './checker.php';
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Assignments</h5>
+                            <p>Here you can see all the available assignments create and curated by teachers</p>
 
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Date Assigned</th>
+                                        <!-- <th scope="col">Operations</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+
+
+                                    <?php
+
+
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "";
+                                    $databasename = "scr";
+
+                                    $conn = new mysqli(
+                                        $servername,
+                                        $username,
+                                        $password,
+                                        $databasename
+                                    );
+
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    }
+
+                                    $id = $_SESSION["userID"];
+
+                                    $assign_query = "SELECT * FROM `users` WHERE `userID` = '$id'";
+
+                                    $assign_result = $conn->query($assign_query);
+
+                                    $ass_row = $assign_result->fetch_assoc();
+
+                                    $course = $ass_row["assigned_course"];
+
+                                    $query_file = "SELECT * FROM `assignments` WHERE `assigned_course` = '$course'";
+
+                                    $result_file = $conn->query($query_file);
+
+                                    if ($result_file->num_rows > 0) {
+                                        while ($row = $result_file->fetch_assoc()) {
+
+
+
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $row['id'] . "</th>";
+                                            echo "<td>" . $row['assignment_name'] . "</td>";
+                                            echo "<td>" . $row['assignment_desc'] . "</td>";
+                                            echo "<td>" . $row['assignment_date'] . "</td>";
+                                            // echo "<td><a href='./delete_assign.php?id=" . $row['id'] . "'><button type='button' class='btn btn-success'><i class='bi bi-tick'></i></button></a></td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "0 results";
+                                    }
+
+                                    ?>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
+        </section>
 
 
     <div class="pagetitle">
@@ -196,73 +145,82 @@ include './checker.php';
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Assignments</h5>
+                            <p>Here you can see all the available assignments create and curated by teachers</p>
 
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">File Name</th>
+                                        <th scope="col">Assignment</th>
+                                        <th scope="col">Date Completed</th>
+                                        <!-- <th scope="col">Operations</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+
+
+                                    <?php
+
+
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "";
+                                    $databasename = "scr";
+
+                                    $conn = new mysqli(
+                                        $servername,
+                                        $username,
+                                        $password,
+                                        $databasename
+                                    );
+
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    }
+
+                                    $id = $_SESSION["userUid"];
+
+                                    $query_file = "SELECT * FROM `completed_assignments` WHERE `user` = '$id'";
+
+                                    $result_file = $conn->query($query_file);
+
+                                    if ($result_file->num_rows > 0) {
+                                        while ($row = $result_file->fetch_assoc()) {
+
+
+
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $row['id'] . "</th>";
+                                            echo "<td>" . $row['filename'] . "</td>";
+                                            echo "<td>" . $row['assignment_name'] . "</td>";
+                                            echo "<td>" . $row['completed_time'] . "</td>";
+                                            // echo "<td><a href='./delete_assign.php?id=" . $row['id'] . "'><button type='button' class='btn btn-success'><i class='bi bi-tick'></i></button></a></td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "0 results";
+                                    }
+
+                                    ?>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main><!-- End #main -->
+        </section>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

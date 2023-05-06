@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+
+session_start();
+
+?>
+<?php include '../inc/checker.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>

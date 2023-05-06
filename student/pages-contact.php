@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+?>
+<?php include '../inc/checker.php'; ?>
+
 <?php 
 
 require_once '../inc/db.php';

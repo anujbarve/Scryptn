@@ -52,7 +52,7 @@ session_start();
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Registered Students</h1>
+            <h1>Manage Assignments</h1>
         </div><!-- End Page Title -->
 
 
@@ -62,8 +62,8 @@ session_start();
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Students</h5>
-                            <p>Welcome to the registered students page! Here, you can view a list of all students who have successfully enrolled for the course/program/event. The table below displays basic information about each student, such as their name, phone, and current status.</p>
+                            <h5 class="card-title">Assignments</h5>
+                            <p>Here you can see all the available assignments create and curated by teachers</p>
 
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
@@ -71,12 +71,14 @@ session_start();
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Current Status</th>
-                                        <th scope="col">Last Login</th>
+                                        <th scope="col">Assigned course ID</th>
+                                        <th scope="col">Date Assigned</th>
+                                        <th scope="col">Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
+
 
                                     <?php
 
@@ -99,41 +101,29 @@ session_start();
 
                                     $id = $_SESSION["teacherID"];
 
-                                    $assign_query = "SELECT * FROM `teachers` WHERE `teacherID` = $id";
-                                    
+                                    $assign_query = "SELECT * FROM `teachers` WHERE `teacherID` = '$id'";
+
                                     $assign_result = $conn->query($assign_query);
 
                                     $ass_row = $assign_result->fetch_assoc();
 
                                     $course = $ass_row["assigned_course"];
 
-                                    $query_file = "SELECT * FROM `users` WHERE `assigned_course` = $course";
-
-                                    $time = time();
+                                    $query_file = "SELECT * FROM `assignments` WHERE `assigned_course` = '$course'";
 
                                     $result_file = $conn->query($query_file);
 
                                     if ($result_file->num_rows > 0) {
                                         while ($row = $result_file->fetch_assoc()) {
 
-                                            $date = date('d/m/Y', $row['last_login']);
 
-                                            $status = 'Offline';
-
-                                            if ($row['last_login'] > $time) {
-                                                $status = 'Online';
-                                                $class = 'bg-success';
-                                            } else {
-                                                $status = 'Offline';
-                                                $class = 'bg-secondary';
-                                            }
 
                                             echo "<tr>";
-                                            echo "<th scope='row'>" . $row['userID'] . "</th>";
-                                            echo "<td>" . $row['userName'] . "</td>";
-                                            echo "<td>" . $row['userPhone'] . "</td>";
-                                            echo "<td><span class='badge rounded-pill $class'>" . $status . "</span></td>";
-                                            echo "<td>" . $date . "</td>";
+                                            echo "<th scope='row'>" . $row['id'] . "</th>";
+                                            echo "<td>" . $row['assignment_name'] . "</td>";
+                                            echo "<td>" . $row['assigned_course'] . "</td>";
+                                            echo "<td>" . $row['assignment_date'] . "</td>";
+                                            echo "<td><a href='./delete_assign.php?id=" . $row['id'] . "'><button type='button' class='btn btn-danger'><i class='bi bi-trash'></i></button></a></td>";
                                             echo "</tr>";
                                         }
                                     } else {
@@ -157,7 +147,7 @@ session_start();
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>SCRYPTN</span></strong>. All Rights Reserved <?php echo $row_assign["assigned_course"]; ?>
+            &copy; Copyright <strong><span>SCRYPTN</span></strong>. All Rights Reserved
         </div>
 
     </footer><!-- End Footer -->
@@ -177,20 +167,7 @@ session_start();
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
-    <script>
-        function updateUserStatus() {
-            jQuery.ajax({
-                url: 'update_user_status.php',
-                success: function() {
 
-                }
-            })
-        }
-
-        setInterval(function() {
-            updateUserStatus();
-        }, 10000);
-    </script>
 
 </body>
 

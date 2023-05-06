@@ -11,7 +11,7 @@ session_start();
 
 <head>
   <style>
-    
+
   </style>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -97,7 +97,11 @@ session_start();
         <div class="col-xl-4">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="../inc/user-data/profile-photos/<?php if($data["user_photo"]){echo $data["user_photo"];}else{echo "default.jpg";};?>" alt="Profile" class="rounded-circle" />
+              <img src="../inc/user-data/profile-photos/<?php if ($data["user_photo"]) {
+                                                          echo $data["user_photo"];
+                                                        } else {
+                                                          echo "default.jpg";
+                                                        }; ?>" alt="Profile" class="rounded-circle" />
               <h2><?php echo $data["userName"]; ?></h2>
               <h3><?php echo $data["user_desc"]; ?></h3>
               <div class="social-links mt-2">
@@ -189,39 +193,39 @@ session_start();
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
                   <p class="small fst-italic">
-                    <?php echo $data["user_desc"];?>
+                    <?php echo $data["user_desc"]; ?>
                   </p>
 
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $data["userName"];?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $data["userName"]; ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
                     <div class="col-lg-9 col-md-8">
-                    <?php echo $data["userAddr"];?>
+                      <?php echo $data["userAddr"]; ?>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $data["userPhone"];?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $data["userPhone"]; ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
                     <div class="col-lg-9 col-md-8">
-                    <?php echo $data["userEmail"];?>
+                      <?php echo $data["userEmail"]; ?>
                     </div>
                   </div>
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                   <!-- Profile Edit Form -->
-                  <form action="../inc/profile_handler.php" method="post"  enctype="multipart/form-data" >
+                  <form action="../inc/profile_handler.php" method="post" enctype="multipart/form-data">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
@@ -237,7 +241,7 @@ session_start();
                     <div hidden class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">ID</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userID" type="number" class="form-control" id="userID" value="<?php echo $id?>" />
+                        <input name="userID" type="number" class="form-control" id="userID" value="<?php echo $id ?>" />
                       </div>
                     </div>
 
@@ -245,69 +249,124 @@ session_start();
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fname" type="text" class="form-control" id="fname" value="<?php echo $data["userName"];?>" />
+                        <input name="fname" type="text" class="form-control" id="fname" value="<?php echo $data["userName"]; ?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">User Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userUid" type="text" class="form-control" id="userUid" value="<?php echo $data["userUid"];?>" />
+                        <input name="userUid" type="text" class="form-control" id="userUid" value="<?php echo $data["userUid"]; ?>" />
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label class="col-sm-4 col-lg-3 col-form-label">Assigned Course</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select name="course" id="formlang" class="form-select" aria-label="Default select example">
+
+                          <?php
+
+
+                          $servername = "localhost";
+                          $username = "root";
+                          $password = "";
+                          $databasename = "scr";
+
+                          $conn = new mysqli(
+                            $servername,
+                            $username,
+                            $password,
+                            $databasename
+                          );
+
+                          if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                          }
+
+                          if (isset($data["assigned_course"])) {
+                            $course_id = $data["assigned_course"];
+                            $course_query = "SELECT * FROM `courses` WHERE `id` = '$course_id'";
+
+                            $time = time();
+  
+                            $course_file = $conn->query($course_query);
+  
+                            if ($course_file->num_rows > 0) {
+                              $crow = $course_file->fetch_assoc();
+                              $course_name = $crow["course_name"]; 
+                            }
+                            
+                            echo "<option selected value='$course_id'>$course_name</option>";
+                          }
+                          $query_file = "SELECT * FROM `courses`";
+
+                          $time = time();
+
+                          $result_file = $conn->query($query_file);
+
+                          if ($result_file->num_rows > 0) {
+                            while ($row = $result_file->fetch_assoc()) {
+                              echo "<option value='" . $row['id'] . "'>" . $row['course_name'] . "</option>";
+                            }
+                          }
+                          ?>
+                        </select>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="user_desc" class="form-control" id="user_desc" style="height: 100px"><?php echo $data["user_desc"];?></textarea>
+                        <textarea name="user_desc" class="form-control" id="user_desc" style="height: 100px"><?php echo $data["user_desc"]; ?></textarea>
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userAddr" type="text" class="form-control" id="userAddr" value="<?php echo $data["userAddr"];?>" />
+                        <input name="userAddr" type="text" class="form-control" id="userAddr" value="<?php echo $data["userAddr"]; ?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userPhone" type="number" class="form-control" id="userPhone" value="<?php echo $data["userPhone"];?>" />
+                        <input name="userPhone" type="number" class="form-control" id="userPhone" value="<?php echo $data["userPhone"]; ?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userEmail" type="email" class="form-control" id="userEmail" value="<?php echo $data["userEmail"];?>" />
+                        <input name="userEmail" type="email" class="form-control" id="userEmail" value="<?php echo $data["userEmail"]; ?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Github Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_gh" type="text" class="form-control" id="user_gh" value="<?php echo $data["user_gh"];?>" />
+                        <input name="user_gh" type="text" class="form-control" id="user_gh" value="<?php echo $data["user_gh"]; ?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_tw" type="text" class="form-control" id="user_tw" value="<?php echo $data["user_tw"];?>" />
+                        <input name="user_tw" type="text" class="form-control" id="user_tw" value="<?php echo $data["user_tw"]; ?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_in" type="text" class="form-control" id="user_in" value="<?php echo $data["user_in"];?>" />
+                        <input name="user_in" type="text" class="form-control" id="user_in" value="<?php echo $data["user_in"]; ?>" />
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="user_ln" type="text" class="form-control" id="user_ln" value="<?php echo $data["user_ln"];?>" />
+                        <input name="user_ln" type="text" class="form-control" id="user_ln" value="<?php echo $data["user_ln"]; ?>" />
                       </div>
                     </div>
 
@@ -320,16 +379,16 @@ session_start();
                   <!-- End Profile Edit Form -->
                 </div>
 
-                
+
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
                   <form action="../inc/changepass.php" method="POST">
 
-                  <div hidden class="row mb-3">
+                    <div hidden class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">ID</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userID" type="number" class="form-control" id="userID" value="<?php echo $id?>" />
+                        <input name="userID" type="number" class="form-control" id="userID" value="<?php echo $id ?>" />
                       </div>
                     </div>
 

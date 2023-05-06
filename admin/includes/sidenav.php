@@ -56,6 +56,25 @@
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#assignments-nav" data-bs-toggle="collapse" href="#">
+          <i class="ri-account-circle-fill"></i><span>Manage Assignments</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="assignments-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="./manage_assignments.php">
+              <i class="bi bi-circle"></i><span>All Assignments</span>
+            </a>
+          </li>
+          <li>
+            <a href="./add_assignment.php">
+              <i class="bi bi-circle"></i><span>Add Assignment</span>
+            </a>
+          </li>
+         
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#students-nav" data-bs-toggle="collapse" href="#">
           <i class="ri-account-circle-fill"></i><span>Manage Students</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>

@@ -1,30 +1,31 @@
 <?php
 
-include './checker.php';
+session_start();
 
 ?>
+<?php include '../inc/checker.php'; ?>
 <?php
 
 require '../inc/db.php';
 
 if (isset($_GET['file'])) {
-    $_SESSION['scode'] = "";
-    $_SESSION['filename'] = "";
-    $_SESSION['input'] = "";
-    $_SESSION["final_output"] = "";
-    $_SESSION['fname'] = "";
+  $_SESSION['scode'] = "";
+  $_SESSION['filename'] = "";
+  $_SESSION['input'] = "";
+  $_SESSION["final_output"] = "";
+  $_SESSION['fname'] = "";
 } else {
-    if (isset($_GET['filename'])) {
-        $fname = $_GET['filename'];
-        $result = mysqli_query($conn, "SELECT * FROM `user_files` WHERE `id` = '$fname'");
-        $row = mysqli_fetch_array($result);
-        $status = 1;
-    } elseif (isset($_SESSION['fname'])) {
-        $fname = $_SESSION['fname'];
-        $result = mysqli_query($conn, "SELECT * FROM `user_files` WHERE `name` = '$fname'");
-        $row = mysqli_fetch_array($result);
-        $status = 1;
-    }
+  if (isset($_GET['filename'])) {
+    $fname = $_GET['filename'];
+    $result = mysqli_query($conn, "SELECT * FROM `user_files` WHERE `id` = '$fname'");
+    $row = mysqli_fetch_array($result);
+    $status = 1;
+  } elseif (isset($_SESSION['fname'])) {
+    $fname = $_SESSION['fname'];
+    $result = mysqli_query($conn, "SELECT * FROM `user_files` WHERE `name` = '$fname'");
+    $row = mysqli_fetch_array($result);
+    $status = 1;
+  }
 }
 ?>
 
@@ -129,7 +130,9 @@ if (isset($_GET['file'])) {
 
                   <div style="margin:20px"></div>
 
-                  <div class="editor" id="editor" style="height:60vh;font-size: 24px;"><?php if(isset($row["source_code"])){echo $row["source_code"];}?></div>
+                  <div class="editor" id="editor" style="height:60vh;font-size: 24px;"><?php if (isset($row["source_code"])) {
+                                                                                          echo $row["source_code"];
+                                                                                        } ?></div>
 
                   <!-- <div id="reportsChart"></div>
 
@@ -194,7 +197,9 @@ if (isset($_GET['file'])) {
 
                   <button type="button" onclick="executeCode()" class="btn btn-success">Execute Code </button>
 
-                  <button type="button" onclick="switchTheme()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Save Code </button>
+                  <button type="button" onclick="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Save Code </button>
+
+                  <button type="button" onclick="switchTheme()" data-bs-toggle="modal" data-bs-target="#assignModal" class="btn btn-secondary">Submit as an Assignment</button>
 
                   <div class="modal fade" id="basicModal" tabindex="-1">
                     <div class="modal-dialog">
@@ -244,7 +249,105 @@ if (isset($_GET['file'])) {
                   </div>
 
 
-                  <button type="button" onclick="switchTheme()" class="btn btn-warning">Share Code</button>
+
+                  <div class="modal fade" id="assignModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Submit Assignment</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+
+                            <div class="row mb-3">
+                              <label for="inputText" id="formfilename" class="col-sm-4 col-form-label">File Name</label>
+                              <div class="col-sm-8">
+                                <input type="text" id="filename" name="filename" class="form-control">
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Assignment Name</label>
+                              <div class="col-sm-8">
+                                <select name="assigned_course" id="assignment_name" class="form-select" aria-label="Default select example">
+                                  <option selected="">Open this select menu</option>
+                                  <?php
+
+
+                                  $servername = "localhost";
+                                  $username = "root";
+                                  $password = "";
+                                  $databasename = "scr";
+
+                                  $conn = new mysqli(
+                                    $servername,
+                                    $username,
+                                    $password,
+                                    $databasename
+                                  );
+
+                                  if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                  }
+
+                                  $id = $_SESSION["userID"];
+
+                                  $assign_query = "SELECT * FROM `users` WHERE `userID` = '$id'";
+
+                                  $assign_result = $conn->query($assign_query);
+
+                                  $ass_row = $assign_result->fetch_assoc();
+
+                                  $course = $ass_row["assigned_course"];
+
+                                  $query_file = "SELECT * FROM `assignments` WHERE `assigned_course` = '$course'";
+
+                                  $result_file = $conn->query($query_file);
+
+                                  if ($result_file->num_rows > 0) {
+                                    while ($row = $result_file->fetch_assoc()) {
+
+                                      echo "<option value='" . $row['assignment_name'] . "'>" . $row['assignment_name'] . "</option>";
+                                    }
+                                  }
+                                  ?>
+
+                                </select>
+                              </div>
+
+                            </div>
+
+                            <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Language</label>
+                              <div class="col-sm-8">
+                                <select name="lang" id="formlang" class="form-select" aria-label="Default select example">
+                                  <option selected value="50">C</option>
+                                  <option value="52">C++</option>
+                                  <option value="68">PHP</option>
+                                  <option value="63">Node</option>
+                                  <option value="71">Python</option>
+                                </select>
+                              </div>
+                            </div>
+                            <!-- <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Code</label>
+                              <div class="col-sm-8">
+                                <textarea id="formcode" class="form-control" style="height: 100px"></textarea>
+                              </div>
+                            </div> -->
+                            <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Submit Button</label>
+                              <div class="col-sm-8">
+                                <button type="submit" onclick="submitAssignment()" class="btn btn-primary">Submit Form</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
 
                 </div>
               </div>
@@ -315,21 +418,19 @@ if (isset($_GET['file'])) {
   <script src="../assets/ace/theme-monokai.js"></script>
   <script src="../assets/ace/theme-github.js"></script>
   <script>
-        function updateUserStatus()
-        {
-            jQuery.ajax({
-                url:'update_user_status.php',
-                success:function()
-                {
+    function updateUserStatus() {
+      jQuery.ajax({
+        url: 'update_user_status.php',
+        success: function() {
 
-                }
-            })
         }
+      })
+    }
 
-        setInterval(function (){
-            updateUserStatus();
-        }, 10000);
-    </script>
+    setInterval(function() {
+      updateUserStatus();
+    }, 10000);
+  </script>
 
 </body>
 

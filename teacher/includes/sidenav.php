@@ -34,11 +34,23 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="queries.php">
-          <i class="bi bi-envelope"></i>
-          <span>Queries By Students</span>
+        <a class="nav-link collapsed" data-bs-target="#teachers-nav" data-bs-toggle="collapse" href="#">
+          <i class="ri-account-circle-fill"></i><span>Manage Assignments</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-      </li><!-- End Contact Page Nav -->
+        <ul id="teachers-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="./manage_assignments.php">
+              <i class="bi bi-circle"></i><span>All Assignments</span>
+            </a>
+          </li>
+          <li>
+            <a href="./add_assignment.php">
+              <i class="bi bi-circle"></i><span>Add Assignment</span>
+            </a>
+          </li>
+         
+        </ul>
+      </li><!-- End Components Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="../index.php#about">

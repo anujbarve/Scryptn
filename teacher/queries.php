@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+?>
+<?php include '../inc/teacherChecker.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
