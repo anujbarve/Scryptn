@@ -355,7 +355,7 @@ if (isset($_POST['submit'])) {
           <div class="col-lg-2 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="./assets/img/anuj_met.jpg" class="img-fluid" alt="">
+                <img src="./assets/img/anuj.jpeg" class="img-fluid" alt="">
                 <div class="social">
                   <a href="https://twitter.com/BarveAnuj"><i class="bi bi-twitter"></i></a>
                   <a href="tel:9604345549"><i class="bi bi-phone"></i></a>
@@ -401,7 +401,7 @@ if (isset($_POST['submit'])) {
               </div>
               <div class="member-info">
                 <h4>Pratik Rahane</h4>
-                <span>Product Manager</span>
+                <span>Team Member</span>
               </div>
             </div>
           </div>
@@ -409,7 +409,7 @@ if (isset($_POST['submit'])) {
           <div class="col-lg-2 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
               <div class="member-img">
-                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
+                <img src="./assets/img/om.jpeg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -448,7 +448,7 @@ if (isset($_POST['submit'])) {
           <div class="col-lg-2 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
+                <img src="./assets/img/ishwari.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
