@@ -112,7 +112,7 @@ if (isset($_GET['file'])) {
 
                 <div class="card-body">
                   <h5 class="card-title">Online Compiler</h5>
-
+                  <h6 id="java_note" class=""></h6>
 
 
                   <div class="col d-flex">
@@ -120,7 +120,7 @@ if (isset($_GET['file'])) {
                       <option selected value="50">C</option>
                       <option value="52">C++</option>
                       <option value="68">PHP</option>
-                      <option value="63">Node</option>
+                      <option value="62">Java</option>
                       <option value="71">Python</option>
                     </select>
                   </div>
@@ -224,7 +224,7 @@ if (isset($_GET['file'])) {
                                   <option selected value="50">C</option>
                                   <option value="52">C++</option>
                                   <option value="68">PHP</option>
-                                  <option value="63">Node</option>
+                                  <option value="62">Java</option>
                                   <option value="71">Python</option>
                                 </select>
                               </div>
@@ -324,7 +324,7 @@ if (isset($_GET['file'])) {
                                   <option selected value="50">C</option>
                                   <option value="52">C++</option>
                                   <option value="68">PHP</option>
-                                  <option value="63">Node</option>
+                                  <option value="62">Java</option>
                                   <option value="71">Python</option>
                                 </select>
                               </div>
@@ -412,11 +412,15 @@ if (isset($_GET['file'])) {
   <!-- Template Main JS File -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/ide.js"></script>
-  <script src="../assets/ace/ext-language_tools.js"></script>
+
+
+
   <script src="../assets/ace/ace.js"></script>
   <script src="../assets/ace/theme-monokai.js"></script>
   <script src="../assets/ace/theme-github.js"></script>
+  <script src="../assets/ace/ext-language_tools.js"></script>
+  <script src="../assets/js/ide.js"></script>
+
   <script>
     function updateUserStatus() {
       jQuery.ajax({
@@ -430,6 +434,38 @@ if (isset($_GET['file'])) {
     setInterval(function() {
       updateUserStatus();
     }, 10000);
+
+    let editor;
+
+    window.onload = function() {
+      ace.require("ace/ext/language_tools");
+      editor = ace.edit("editor");
+      editor.setTheme("ace/theme/monokai");
+      editor.session.setMode("ace/mode/c_cpp");
+      editor.setOptions({
+        enableSnippets: true,
+        enableLiveAutocompletion: true,
+        enableBasicAutocompletion: true,
+      });
+    };
+
+    function changeLanguage() {
+      let language = $("#languages").val();
+
+      if (language == "50" || language == "50") {
+        editor.session.setMode("ace/mode/c_cpp");
+        document.getElementById("java_note").innerHTML = "";
+      } else if (language == "68") {
+        editor.session.setMode("ace/mode/php");
+        document.getElementById("java_note").innerHTML = "";
+      } else if (language == "71") {
+        editor.session.setMode("ace/mode/python");
+        document.getElementById("java_note").innerHTML = "";
+      } else if (language == "62") {
+        editor.session.setMode("ace/mode/java");
+        document.getElementById("java_note").innerHTML = "Note : While Running Java Code write the main function in \"Main\" Class";
+      }
+    }
   </script>
 
 </body>
