@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 06, 2023 at 10:06 PM
+-- Generation Time: May 07, 2023 at 11:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -93,7 +93,7 @@ CREATE TABLE `completed_assignments` (
 --
 
 INSERT INTO `completed_assignments` (`id`, `filename`, `assignment_name`, `user`, `source_code`, `lang`, `completed_time`) VALUES
-(1, '', 'Implement Tree ', 'anujbarve', 'asdfsadfsadf', 50, '2023-05-07');
+(1, 'Implemented Tree', 'Implement Tree ', 'anujbarve', 'print(\"Implement Tree\")', 50, '2023-05-07');
 
 -- --------------------------------------------------------
 
@@ -167,7 +167,7 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`teacherID`, `teacherName`, `teacherEmail`, `teacherAddr`, `teacherPhone`, `teacherUid`, `teacherPwd`, `teacher_ln`, `teacher_gh`, `teacher_in`, `teacher_tw`, `teacher_desc`, `teacher_photo`, `last_login`, `assigned_course`) VALUES
-(1, 'DSA Teacher', 'dsateach@mail.com', '', '', 'dsa', '$2y$10$18JLjtr9BPZobzH.gsNUvenXpmzLrnm5bOL5RaK.knfMMh4Jnd0Zm', '', '', '', '', '', NULL, NULL, 1);
+(1, 'DSA Teacher', 'dsateach@mail.com', '', '', 'dsa', '$2y$10$18JLjtr9BPZobzH.gsNUvenXpmzLrnm5bOL5RaK.knfMMh4Jnd0Zm', '', '', '', '', '', NULL, 1683449696, 1);
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `userName`, `userEmail`, `userAddr`, `userPhone`, `userUid`, `userPwd`, `user_ln`, `user_gh`, `user_in`, `user_tw`, `user_desc`, `user_photo`, `last_login`, `assigned_course`) VALUES
-(1, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', 'Nasik, Maharashtra, India ', '9604345549', 'anujbarve', '$2y$10$SLU7.nBgkfijYEv3iWIGCO/ObECw9wqwFQciEU8eczhO0QJwU71Zy', 'https://in.linkedin.com/in/anuj-barve-838b9b162', 'https://github.com/anujbarve/', 'https://www.instagram.com/anuj_barve/', 'https://twitter.com/BarveAnuj', 'Web and App Developer | Flutter Enthusiast | Student | Aspiring Computer Engineer | Introvert / Extrovert Depends on the situation ; )', 'pfp.jpg', 1683403587, 1),
+(1, 'Anuj Vinod Barve', 'anujbarve27@gmail.com', 'Nasik, Maharashtra, India ', '9604345549', 'anujbarve', '$2y$10$SLU7.nBgkfijYEv3iWIGCO/ObECw9wqwFQciEU8eczhO0QJwU71Zy', 'https://in.linkedin.com/in/anuj-barve-838b9b162', 'https://github.com/anujbarve/', 'https://www.instagram.com/anuj_barve/', 'https://twitter.com/BarveAnuj', 'Web and App Developer | Flutter Enthusiast | Student | Aspiring Computer Engineer | Introvert / Extrovert Depends on the situation ; )', 'pfp.jpg', 1683448419, 1),
 (2, 'Pratik Rahane', 'pratikrahane@gmail.com', '', '', 'pratikrahane', '$2y$10$qU1SuYDVzyqWxDdbn2ec3eYA3uUOEihZvYR/VZ/trYWORGb4dcb22', '', '', '', '', '', NULL, NULL, NULL),
 (3, 'Om Thorat', 'omthorat@gmail.com', NULL, NULL, 'omthorat', '$2y$10$j40GIO1PU.3g7B8uoCWd3OJvErCKGlnZN4TVvI1l/o29nDV.Ez30S', NULL, NULL, NULL, NULL, NULL, NULL, 1683214610, NULL),
 (4, 'Dhiraj Yadav', 'dhirajyadav@gmail.com', NULL, NULL, 'dhirajyadav', '$2y$10$/tGEMK1tbNg4CeHjv6Vefe3nH.xgb8FKeJBRCXQnM3J1XgIy8eJZm', NULL, NULL, NULL, NULL, NULL, NULL, 1683214701, NULL),
@@ -218,7 +218,6 @@ CREATE TABLE `user_files` (
   `extension` varchar(255) DEFAULT NULL,
   `source_code` text DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
-  `assignment_id` int(11) NOT NULL,
   `time_stamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -226,9 +225,11 @@ CREATE TABLE `user_files` (
 -- Dumping data for table `user_files`
 --
 
-INSERT INTO `user_files` (`id`, `name`, `extension`, `source_code`, `user_name`, `assignment_id`, `time_stamp`) VALUES
-(1, 'Hello World In CPP', '52', '#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n    cout<<\"Hello World\";\n}', 'anujbarve', 0, '2023-05-04 15:56:30'),
-(3, 'Python hello world', '71', 'print(\"Hello world\")', 'anujbarve', 0, '2023-05-04 18:32:24');
+INSERT INTO `user_files` (`id`, `name`, `extension`, `source_code`, `user_name`, `time_stamp`) VALUES
+(3, 'Python hello world', '71', 'print(\"Hello world\")', 'anujbarve', '2023-05-04 18:32:24'),
+(4, 'Hello in C', '50', '#include <stdio.h>\n\nint main()\n{\n    printf(\"Hello C\");\n}', 'anujbarve', '2023-05-07 07:30:51'),
+(5, 'First Java Code', '62', 'class Main{\n    public static void main(String args[])\n    {\n        System.out.println(\"Hello World\");\n    }\n}', 'anujbarve', '2023-05-07 07:35:20'),
+(6, 'Teacher is here', '71', 'print(\"Teacher is here\")', 'dsa', '2023-05-07 08:52:45');
 
 -- --------------------------------------------------------
 
@@ -354,7 +355,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_files`
 --
 ALTER TABLE `user_files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_posts`
