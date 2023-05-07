@@ -17,7 +17,7 @@ if (isset($_GET['file'])) {
 } else {
   if (isset($_GET['filename'])) {
     $fname = $_GET['filename'];
-    $result = mysqli_query($conn, "SELECT * FROM `user_files` WHERE `id` = '$fname'");
+    $result = mysqli_query($conn, "SELECT * FROM `completed_assignments` WHERE `id` = '$fname'");
     $row = mysqli_fetch_array($result);
     $status = 1;
   } elseif (isset($_SESSION['fname'])) {
@@ -76,11 +76,11 @@ if (isset($_GET['file'])) {
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>View Assignment</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="index.html">Manage Assignments</a></li>
+          <li class="breadcrumb-item active">View Assignment</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -197,54 +197,6 @@ if (isset($_GET['file'])) {
 
                   <button type="button" onclick="executeCode()" class="btn btn-success">Execute Code </button>
 
-                  <button type="button" onclick="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Save Code </button>
-
-                  <div class="modal fade" id="basicModal" tabindex="-1">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Save Code</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form>
-                            <div class="row mb-3">
-                              <label for="inputText" id="formfilename" class="col-sm-4 col-form-label">File Name</label>
-                              <div class="col-sm-8">
-                                <input type="text" id="filename" name="filename" class="form-control">
-                              </div>
-                            </div>
-
-                            <div class="row mb-3">
-                              <label class="col-sm-4 col-form-label">Language</label>
-                              <div class="col-sm-8">
-                                <select name="lang" id="formlang" class="form-select" aria-label="Default select example">
-                                  <option selected value="50">C</option>
-                                  <option value="52">C++</option>
-                                  <option value="68">PHP</option>
-                                  <option value="62">Java</option>
-                                  <option value="71">Python</option>
-                                </select>
-                              </div>
-                            </div>
-                            <!-- <div class="row mb-3">
-                              <label class="col-sm-4 col-form-label">Code</label>
-                              <div class="col-sm-8">
-                                <textarea id="formcode" class="form-control" style="height: 100px"></textarea>
-                              </div>
-                            </div> -->
-                            <div class="row mb-3">
-                              <label class="col-sm-4 col-form-label">Submit Button</label>
-                              <div class="col-sm-8">
-                                <button type="submit" onclick="saveCodeTeach()" class="btn btn-primary">Submit Form</button>
-                              </div>
-                            </div>
-
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
                 </div>
               </div>

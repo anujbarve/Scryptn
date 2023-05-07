@@ -18,14 +18,7 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.php">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="students.php">
           <i class="ri-account-circle-fill"></i>
@@ -44,10 +37,16 @@
             </a>
           </li>
           <li>
+            <a href="./completed_assignments.php">
+              <i class="bi bi-circle"></i><span>Completed Assignments</span>
+            </a>
+          </li>
+          <li>
             <a href="./add_assignment.php">
               <i class="bi bi-circle"></i><span>Add Assignment</span>
             </a>
           </li>
+          
          
         </ul>
       </li><!-- End Components Nav -->

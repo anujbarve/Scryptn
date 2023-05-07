@@ -66,6 +66,11 @@
             </a>
           </li>
           <li>
+            <a href="./completed_assignments.php">
+              <i class="bi bi-circle"></i><span>Completed Assignments</span>
+            </a>
+          </li>
+          <li>
             <a href="./add_assignment.php">
               <i class="bi bi-circle"></i><span>Add Assignment</span>
             </a>

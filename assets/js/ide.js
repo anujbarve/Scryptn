@@ -13,6 +13,22 @@ function saveCode() {
   });
 }
 
+function saveCodeTeach() {
+  $.ajax({
+    url: "../inc/teach_code_handler.php",
+    method: "POST",
+    data: {
+      lang: $("#formlang").val(),
+      scode: editor.getSession().getValue(),
+      filename: $("#filename").val(),
+    },
+    success: function (response) {
+      $(".output").html(response);
+    },
+  });
+}
+
+
 function submitAssignment() {
   $.ajax({
     url: "../inc/assignment_handler.php",
@@ -21,7 +37,7 @@ function submitAssignment() {
       assignment_name : $("#assignment_name").val(),
       lang: $("#formlang").val(),
       scode: editor.getSession().getValue(),
-      filename: $("#filename").val(),
+      filename: $("#filename_assign").val(),
     },
     success: function (response) {
       $(".output").html(response);
