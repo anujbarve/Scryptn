@@ -391,7 +391,7 @@ if (isset($_POST['submit'])) {
           <div class="col-lg-2 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
               <div class="member-img">
-                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
+                <img src="./assets/img/pratik.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -429,7 +429,7 @@ if (isset($_POST['submit'])) {
           <div class="col-lg-2 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="./inc/user-data/profile-photos/default.jpg" class="img-fluid" alt="">
+                <img src="./assets/img/swarali.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>

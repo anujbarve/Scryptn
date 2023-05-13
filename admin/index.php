@@ -4,6 +4,7 @@ session_start();
 
 ?>
 <?php include '../inc/adminChecker.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - SCRYPTN Bootstrap Template</title>
+  <title>Online Compiler</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -67,79 +68,12 @@ session_start();
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-
-
-                <div class="card-body">
-                  <h5 class="card-title">Students</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="ri-account-circle-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                  
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-                        <!-- Sales Card -->
-                        <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-
-
-                <div class="card-body">
-                  <h5 class="card-title">Teachers</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="ri-admin-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                  
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-
-                        <!-- Sales Card -->
-                        <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-
-
-                <div class="card-body">
-                  <h5 class="card-title">Courses</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="ri-book-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                  
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-           
 
             <!-- Reports -->
             <div class="col-12">
               <div class="card">
 
-                <div class="filter">
+                <!-- <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
@@ -150,13 +84,33 @@ session_start();
                     <li><a class="dropdown-item" href="#">This Month</a></li>
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
-                </div>
+                </div> -->
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Online Compiler</h5>
+                  <h6 id="java_note" class=""></h6>
+
+
+                  <div class="col d-flex">
+                    <select id="languages" onchange="changeLanguage()" class="form-select" aria-label="Default select example">
+                      <option selected value="50">C</option>
+                      <option value="52">C++</option>
+                      <option value="68">PHP</option>
+                      <option value="62">Java</option>
+                      <option value="71">Python</option>
+                    </select>
+                  </div>
+
 
                   <!-- Line Chart -->
-                  <div id="reportsChart"></div>
+
+                  <div style="margin:20px"></div>
+
+                  <div class="editor" id="editor" style="height:60vh;font-size: 24px;"><?php if (isset($row["source_code"])) {
+                                                                                          echo $row["source_code"];
+                                                                                        } ?></div>
+
+                  <!-- <div id="reportsChart"></div>
 
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
@@ -172,7 +126,7 @@ session_start();
                           data: [15, 11, 32, 18, 9, 24, 11]
                         }],
                         chart: {
-                          height: 350,
+                          height: 550,
                           type: 'area',
                           toolbar: {
                             show: false
@@ -209,161 +163,73 @@ session_start();
                         }
                       }).render();
                     });
-                  </script>
+                  </script> -->
                   <!-- End Line Chart -->
 
                 </div>
 
+                <div class="card-body">
+                  <h5 class="card-title">Code Operations</h5>
+
+                  <button type="button" onclick="executeCode()" class="btn btn-success">Execute Code </button>
+
+                  <!-- <button type="button" onclick="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Save Code </button> -->
+
+                  <div class="modal fade" id="basicModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Save Code</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="row mb-3">
+                              <label for="inputText" id="formfilename" class="col-sm-4 col-form-label">File Name</label>
+                              <div class="col-sm-8">
+                                <input type="text" id="filename" name="filename" class="form-control">
+                              </div>
+                            </div>
+
+                            <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Language</label>
+                              <div class="col-sm-8">
+                                <select name="lang" id="formlang" class="form-select" aria-label="Default select example">
+                                  <option selected value="50">C</option>
+                                  <option value="52">C++</option>
+                                  <option value="68">PHP</option>
+                                  <option value="62">Java</option>
+                                  <option value="71">Python</option>
+                                </select>
+                              </div>
+                            </div>
+                            <!-- <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Code</label>
+                              <div class="col-sm-8">
+                                <textarea id="formcode" class="form-control" style="height: 100px"></textarea>
+                              </div>
+                            </div> -->
+                            <div class="row mb-3">
+                              <label class="col-sm-4 col-form-label">Submit Button</label>
+                              <div class="col-sm-8">
+                                <button type="submit" onclick="saveCodeTeach()" class="btn btn-primary">Submit Form</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
+
+
+
             </div><!-- End Reports -->
 
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                        <td>$64</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                        <td>$147</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-
-            <!-- Top Selling -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Top Selling <span>| Today</span></h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">Preview</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Sold</th>
-                        <th scope="col">Revenue</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-1.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                        <td>$64</td>
-                        <td class="fw-bold">124</td>
-                        <td>$5,828</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-2.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                        <td>$46</td>
-                        <td class="fw-bold">98</td>
-                        <td>$4,508</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-3.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                        <td>$59</td>
-                        <td class="fw-bold">74</td>
-                        <td>$4,366</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-4.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                        <td>$32</td>
-                        <td class="fw-bold">63</td>
-                        <td>$2,016</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-5.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                        <td>$79</td>
-                        <td class="fw-bold">41</td>
-                        <td>$3,239</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Top Selling -->
 
           </div>
         </div><!-- End Left side columns -->
@@ -371,289 +237,294 @@ session_start();
         <!-- Right side columns -->
         <div class="col-lg-4">
 
-          <!-- Recent Activity -->
+          <!-- Default Card -->
           <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
             <div class="card-body">
-              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
-
-              <div class="activity">
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                  <div class="activity-content">
-                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">56 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptatem blanditiis blanditiis eveniet
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 hrs</div>
-                  <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptates corrupti molestias voluptatem
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">1 day</div>
-                  <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                  <div class="activity-content">
-                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 days</div>
-                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                  <div class="activity-content">
-                    Est sit eum reiciendis exercitationem
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">4 weeks</div>
-                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                  <div class="activity-content">
-                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                  </div>
-                </div><!-- End activity item-->
+              <h5 class="card-title">Input</h5>
+              <div class="input"></div>
+              <textarea name="ip" style="height:20vh;width:100%;color:white;background-color:darkslategray" id="textip"></textarea>
+            </div>
+          </div><!-- End Default Card -->
+          <!-- Default Card -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Output</h5>
+              <div class="output" style="height:50vh;color:white;background-color:darkslategray;padding:20px" id="output">
 
               </div>
-
             </div>
-          </div><!-- End Recent Activity -->
-
-          <!-- Budget Report -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Budget Report <span>| This Month</span></h5>
-
-              <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                      data: ['Allocated Budget', 'Actual Spending']
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Sales',
-                          max: 6500
-                        },
-                        {
-                          name: 'Administration',
-                          max: 16000
-                        },
-                        {
-                          name: 'Information Technology',
-                          max: 30000
-                        },
-                        {
-                          name: 'Customer Support',
-                          max: 38000
-                        },
-                        {
-                          name: 'Development',
-                          max: 52000
-                        },
-                        {
-                          name: 'Marketing',
-                          max: 25000
-                        }
-                      ]
-                    },
-                    series: [{
-                      name: 'Budget vs spending',
-                      type: 'radar',
-                      data: [{
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: 'Allocated Budget'
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: 'Actual Spending'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Budget Report -->
-
-          <!-- Website Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Website Traffic -->
-
-          <!-- News & Updates Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-1.jpg" alt="">
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-2.jpg" alt="">
-                  <h4><a href="#">Quidem autem et impedit</a></h4>
-                  <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-3.jpg" alt="">
-                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-4.jpg" alt="">
-                  <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                  <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-5.jpg" alt="">
-                  <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
-
-            </div>
-          </div><!-- End News & Updates -->
+          </div><!-- End Default Card -->
 
         </div><!-- End Right side columns -->
 
       </div>
     </section>
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Students</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri-account-circle-fill"></i>
+                    </div>
+                    <div class="ps-3">
+
+                      <?php
+                      $con = mysqli_connect("localhost", "root", "", "scr");
+                      // Check connection
+                      if (mysqli_connect_errno()) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                      }
+
+                      $sql = "SELECT * FROM users";
+
+                      if ($result = mysqli_query($con, $sql)) {
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows($result);
+                        // printf("Result set has %d rows.\n", $rowcount);
+                        // // Free result set
+                        // mysqli_free_result($result);
+                      }
+
+                      mysqli_close($con);
+                      ?>
+                      <h6><?php echo $rowcount; ?></h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Teachers</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri-admin-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <?php
+                      $con = mysqli_connect("localhost", "root", "", "scr");
+                      // Check connection
+                      if (mysqli_connect_errno()) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                      }
+
+                      $sql = "SELECT * FROM teachers";
+
+                      if ($result = mysqli_query($con, $sql)) {
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows($result);
+                        // printf("Result set has %d rows.\n", $rowcount);
+                        // // Free result set
+                        // mysqli_free_result($result);
+                      }
+
+                      mysqli_close($con);
+                      ?>
+                      <h6><?php echo $rowcount; ?></h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Courses</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri-book-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <?php
+                      $con = mysqli_connect("localhost", "root", "", "scr");
+                      // Check connection
+                      if (mysqli_connect_errno()) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                      }
+
+                      $sql = "SELECT * FROM courses";
+
+                      if ($result = mysqli_query($con, $sql)) {
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows($result);
+                        // printf("Result set has %d rows.\n", $rowcount);
+                        // // Free result set
+                        // mysqli_free_result($result);
+                      }
+
+                      mysqli_close($con);
+                      ?>
+                      <h6><?php echo $rowcount; ?></h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+
+
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Assignments</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri-edit-box-fill"></i>
+                    </div>
+                    <div class="ps-3">
+
+                      <?php
+                      $con = mysqli_connect("localhost", "root", "", "scr");
+                      // Check connection
+                      if (mysqli_connect_errno()) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                      }
+
+                      $sql = "SELECT * FROM assignments";
+
+                      if ($result = mysqli_query($con, $sql)) {
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows($result);
+                        // printf("Result set has %d rows.\n", $rowcount);
+                        // // Free result set
+                        // mysqli_free_result($result);
+                      }
+
+                      mysqli_close($con);
+                      ?>
+                      <h6><?php echo $rowcount; ?></h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Files</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri-file-cloud-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <?php
+                      $con = mysqli_connect("localhost", "root", "", "scr");
+                      // Check connection
+                      if (mysqli_connect_errno()) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                      }
+
+                      $sql = "SELECT * FROM user_files";
+
+                      if ($result = mysqli_query($con, $sql)) {
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows($result);
+                        // printf("Result set has %d rows.\n", $rowcount);
+                        // // Free result set
+                        // mysqli_free_result($result);
+                      }
+
+                      mysqli_close($con);
+                      ?>
+                      <h6><?php echo $rowcount; ?></h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+
+                <div class="card-body">
+                  <h5 class="card-title">Queries</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri-mail-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <?php
+                      $con = mysqli_connect("localhost", "root", "", "scr");
+                      // Check connection
+                      if (mysqli_connect_errno()) {
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                      }
+
+                      $sql = "SELECT * FROM contact";
+
+                      if ($result = mysqli_query($con, $sql)) {
+                        // Return the number of rows in result set
+                        $rowcount = mysqli_num_rows($result);
+                        // printf("Result set has %d rows.\n", $rowcount);
+                        // // Free result set
+                        // mysqli_free_result($result);
+                      }
+
+                      mysqli_close($con);
+                      ?>
+                      <h6><?php echo $rowcount; ?></h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+      </div>
+    </section>
+
 
   </main><!-- End #main -->
 
@@ -662,7 +533,7 @@ session_start();
     <div class="copyright">
       &copy; Copyright <strong><span>SCRYPTN</span></strong>. All Rights Reserved
     </div>
-   
+
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -678,7 +549,63 @@ session_start();
   <script src="../assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="../assets/js/main.js"></script>
+
+
+
+  <script src="../assets/ace/ace.js"></script>
+  <script src="../assets/ace/theme-monokai.js"></script>
+  <script src="../assets/ace/theme-github.js"></script>
+  <script src="../assets/ace/ext-language_tools.js"></script>
+  <script src="../assets/js/ide.js"></script>
+
+  <script>
+    function updateUserStatus() {
+      jQuery.ajax({
+        url: 'update_user_status.php',
+        success: function() {
+
+        }
+      })
+    }
+
+    setInterval(function() {
+      updateUserStatus();
+    }, 10000);
+
+    let editor;
+
+    window.onload = function() {
+      ace.require("ace/ext/language_tools");
+      editor = ace.edit("editor");
+      editor.setTheme("ace/theme/monokai");
+      editor.session.setMode("ace/mode/c_cpp");
+      editor.setOptions({
+        enableSnippets: true,
+        enableLiveAutocompletion: true,
+        enableBasicAutocompletion: true,
+      });
+    };
+
+    function changeLanguage() {
+      let language = $("#languages").val();
+
+      if (language == "50" || language == "50") {
+        editor.session.setMode("ace/mode/c_cpp");
+        document.getElementById("java_note").innerHTML = "";
+      } else if (language == "68") {
+        editor.session.setMode("ace/mode/php");
+        document.getElementById("java_note").innerHTML = "";
+      } else if (language == "71") {
+        editor.session.setMode("ace/mode/python");
+        document.getElementById("java_note").innerHTML = "";
+      } else if (language == "62") {
+        editor.session.setMode("ace/mode/java");
+        document.getElementById("java_note").innerHTML = "Note : While Running Java Code write the main function in \"Main\" Class";
+      }
+    }
+  </script>
 
 </body>
 

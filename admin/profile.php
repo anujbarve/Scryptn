@@ -16,7 +16,7 @@ session_start();
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>Users / Profile - SCRYPTN Bootstrap Template</title>
+  <title>Users / Profile - SCRYPTN </title>
   <meta content="" name="description" />
   <meta content="" name="keywords" />
 
@@ -276,7 +276,7 @@ session_start();
                   <div hidden class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">ID</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="userID" type="number" class="form-control" id="userID" value="<?php echo $id?>" />
+                        <input name="adminID" type="number" class="form-control" id="userID" value="<?php echo $id?>" />
                       </div>
                     </div>
 
@@ -302,7 +302,7 @@ session_start();
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" name="submit" class="btn btn-primary">
+                      <button type="submit" name="adminsubmit" class="btn btn-primary">
                         Change Password
                       </button>
                     </div>

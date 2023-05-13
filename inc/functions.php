@@ -356,7 +356,61 @@ function changePassword($id,$oldPassword,$newPassword)
             $statement = $conn->prepare($sql);
             $statement->bind_param('si', $password, $id);
             $statement->execute();
-            header("location: ../admin/login.php");
+            header("location: ../login.php?password_changed_successfully");
+        } else
+            $message = "Current Password is not correct";
+    }
+}
+}
+
+function changePasswordTeacher($id,$oldPassword,$newPassword)
+{
+    session_start();
+    $conn = mysqli_connect("localhost", "root", "", "scr");
+    if (count($_POST) > 0) {
+    $sql = "SELECT * FROM teachers WHERE teacherID= ?";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param('i', $id);
+    $statement->execute();
+    $result = $statement->get_result();
+    $row = $result->fetch_assoc();
+
+    if (! empty($row)) {
+        $hashedPassword = $row["teacherPwd"];
+        $password = PASSWORD_HASH($newPassword, PASSWORD_DEFAULT);
+        if (password_verify($oldPassword, $hashedPassword)) {
+            $sql = "UPDATE teachers set teacherPwd=? WHERE teacherID=?";
+            $statement = $conn->prepare($sql);
+            $statement->bind_param('si', $password, $id);
+            $statement->execute();
+            header("location: ../teacher/login.php?password_changed_successfully");
+        } else
+            $message = "Current Password is not correct";
+    }
+}
+}
+
+function changePasswordAdmin($id,$oldPassword,$newPassword)
+{
+    session_start();
+    $conn = mysqli_connect("localhost", "root", "", "scr");
+    if (count($_POST) > 0) {
+    $sql = "SELECT * FROM admins WHERE id = ?";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param('i', $id);
+    $statement->execute();
+    $result = $statement->get_result();
+    $row = $result->fetch_assoc();
+
+    if (! empty($row)) {
+        $hashedPassword = $row["password"];
+        $password = PASSWORD_HASH($newPassword, PASSWORD_DEFAULT);
+        if (password_verify($oldPassword, $hashedPassword)) {
+            $sql = "UPDATE admins set password=? WHERE id=?";
+            $statement = $conn->prepare($sql);
+            $statement->bind_param('si', $password, $id);
+            $statement->execute();
+            header("location: ../admin/login.php?password_changed_successfully");
         } else
             $message = "Current Password is not correct";
     }

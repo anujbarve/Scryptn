@@ -12,7 +12,7 @@ session_start();
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Components / Accordion - SCRYPTN Bootstrap Template</title>
+    <title>Components / Accordion - SCRYPTN </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 

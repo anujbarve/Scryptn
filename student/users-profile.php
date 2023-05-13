@@ -16,7 +16,7 @@ session_start();
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>Users / Profile - SCRYPTN Bootstrap Template</title>
+  <title>Users / Profile - SCRYPTN </title>
   <meta content="" name="description" />
   <meta content="" name="keywords" />
 
@@ -414,7 +414,7 @@ session_start();
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" name="submit" class="btn btn-primary">
+                      <button type="submit" name="usersubmit" class="btn btn-primary">
                         Change Password
                       </button>
                     </div>
