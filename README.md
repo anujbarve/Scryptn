@@ -22,44 +22,25 @@ To get started with SCRYPTN, follow the instructions below:
 
 - PHP (>= 7.0)
 - MySQL (>= 5.7)
-- Judge0 API Key (Obtain your API key from [Judge0](https://judge0.com))
+- A self-hosted [Judge0](https://judge0.com) instance
 
 ### Installation
 
 1. Clone the SCRYPTN repository to your local machine:
 
    ```
-   git clone https://github.com/yourusername/scryptn.git
+   git clone https://github.com/anujbarve/Scryptn.git
    ```
 
-2. Create a MySQL database for SCRYPTN.
+2. Create a MySQL database named `scr`.
 
-3. Import the `database.sql` file into your newly created database to set up the required tables.
+3. Import `scr.sql` into that database to set up the tables.
 
-4. In the `config` folder, rename `config-sample.php` to `config.php`.
+4. Set your MySQL credentials in `inc/db.php`.
 
-5. Open `config.php` and provide the necessary information:
+5. Point `inc/compiler.php` at your Judge0 instance. It expects `http://172.17.0.1:2358` by default.
 
-   - Set your Judge0 API key:
-
-     ```php
-     define('JUDGE0_API_KEY', 'your_judge0_api_key');
-     ```
-
-   - Configure your MySQL database credentials:
-
-     ```php
-     define('DB_HOST', 'your_database_host');
-     define('DB_NAME', 'your_database_name');
-     define('DB_USER', 'your_database_username');
-     define('DB_PASSWORD', 'your_database_password');
-     ```
-
-6. Ensure that the `uploads` directory has proper write permissions so that students can upload their assignment files.
-
-7. Start the development server or deploy the application to your desired web server.
-
-8. Access SCRYPTN through the appropriate URL based on your deployment configuration.
+6. Serve the project from a PHP web server and open it in your browser.
 
 ## Contributing
 
@@ -91,7 +72,7 @@ Contributions to SCRYPTN are always welcome! If you'd like to contribute, please
 
 
 
-SCRYPTN is released under the [MIT License](LICENSE.md).
+SCRYPTN is released under the MIT License.
 
 ## Acknowledgements
 
@@ -101,7 +82,4 @@ SCRYPTN is released under the [MIT License](LICENSE.md).
 
 ## Contact
 
-If you have any questions, suggestions, or feedback, please feel free to contact us:
-
-- Email: [support@scryptn.com](mailto:support@scryptn.com)
-- Website: [https://www.scryptn.com](https://www.scryptn.com)
+For questions or feedback, please open an issue on this repository.
